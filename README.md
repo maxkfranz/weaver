@@ -14,7 +14,7 @@ If you're looking to get an old version of the library, you can build off the as
 
 ## Contributing to Weaver.js
 
-Weaver.js is an open source project, and anyone interested is encouraged to contribute to Weaver.js.  We gladly accept pull requests.  If you are interested in regular contributions to Weaver.js, then we can arrange granting you permission to the repository by [contacting us](mailto:cytoscape-discuss@googlegroups.com?subject=Granting permission to Weaver.js repository).
+Weaver.js is an open source project, and anyone interested is encouraged to contribute to Weaver.js.  We gladly accept pull requests.
 
 If your pull request is a bugfix, please make changes to the master branch.  Otherwise, please make changes to the next version's branch (i.e. unstable).
 
