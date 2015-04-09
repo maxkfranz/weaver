@@ -1,0 +1,35 @@
+{
+  "name": "weaver",
+  "version": "1.0.0",
+  "license": "LGPL-3.0+",
+  "description": "Concise and readable multitasking",
+  "homepage": "http://weaver.maxfranz.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxkfranz/weaver.git"
+  },
+  "authors": [
+    {
+      "name": "Max Franz",
+      "email": "maxkfranz@gmail.com",
+      "homepage": "http://maxfranz.org"
+    }
+  ],
+  "keywords": [
+    "multitasking",
+    "thread",
+    "fabric",
+    "worker",
+    "task"
+  ],
+  "main": "dist/weaver.js",
+  "ignore": [
+    "documentation",
+    "src",
+    "test",
+    "gulpfile.js",
+    "*.sh",
+    "package.json",
+    "README.md"
+  ]
+}

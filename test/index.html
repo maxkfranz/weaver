@@ -1,0 +1,52 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cy.js Mocha Tests</title>
+
+  <link rel="stylesheet" href="lib/mocha.css" />
+
+  <script src="lib/chai.js"></script>
+  <script src="lib/jquery.js"></script>
+
+  <!-- `gulp testrefs` updates these scripts -->
+
+  <!-- inject:js -->
+  <script src="../src/preamble.js"></script>
+  <script src="../src/namespace.js"></script>
+  <script src="../src/promise.js"></script>
+  <script src="../src/is.js"></script>
+  <script src="../src/util.js"></script>
+  <script src="../src/event.js"></script>
+  <script src="../src/define.js"></script>
+  <script src="../src/thread.js"></script>
+  <script src="../src/fabric.js"></script>
+  <!-- endinject -->
+
+  <script>
+    window.require = function( name, fallbackVal ){
+      if( fallbackVal ){ return fallbackVal; }
+
+      return window[ name ];
+    };
+  </script>
+</head>
+
+  <body>
+    <div id="mocha"></div>
+    <script src="lib/mocha.js"></script>
+    <script>mocha.setup('bdd')</script>
+
+    <!-- `gulp testlist` updates these scripts -->
+
+    <!-- inject:test:js -->
+    <script src="events.js"></script>
+    <script src="fabric.js"></script>
+    <script src="thread.js"></script>
+    <!-- endinject -->
+  
+    <script>mocha.checkLeaks(); mocha.run();</script>
+
+    <div id="cy"></div>
+
+  </body>
+</html>

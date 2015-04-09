@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+		<link rel="canonical" href="http://js.cytoscape.org" />
+		<meta name="description" content="Concise and readable multitasking (compatible with CommonJS/Node.js/io.js, AMD/Require.js, Bower, npm, and plain JavaScript)">
+		<meta name="author" content="Max Franz">
+		<meta name="robots" content="all" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimal-ui">
+
+		<title>Weaver.js</title>
+
+		<!-- inject:css -->
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/highlight/github.css">
+		<link rel="stylesheet" href="css/style.css">
+		<!-- endinject -->
+		
+	</head>
+
+	<body>
+
+		<div id="content">
+
+			<h1 id="top" class="title">Weaver.js</h1>
+			<div class="subtitle">Concise and readable multitasking (compatible with <a target="_blank" href="http://wiki.commonjs.org/wiki/CommonJS">CommonJS</a>/<a target="_blank" href="http://nodejs.org/">Node.js</a>/<a target="_blank" href="http://iojs.org/">io.js</a>, <a target="_blank" href="http://requirejs.org">AMD/Require.js</a>, <a target="_blank" href="http://bower.io">Bower</a>, <a target="_blank" href="http://npmjs.org">npm</a>, and plain JavaScript)</div>
+			
+			<div class="buttons-subtitle">
+				<a class="button green" target="_blank" href="https://github.com/maxkfranz/weaver"><span class="icon-github-alt"></span> GitHub</a>
+
+				<a id="download-button" class="button green" href="download/weaver.js-{{version}}.zip"><span class="icon-download-alt"></span> Download {{version}}</a>
+			</div>
+
+			<div class="links">
+				<a target="_blank" href="https://twitter.com/maxkfranz"><span class="icon-twitter"></span> Twitter</a> |
+				<a target="_blank" href="https://github.com/maxkfranz/weaver/issues/new"><span class="icon-bug"></span> File an issue or request a feature</a> |
+				<a target="_blank" href="http://stackoverflow.com/questions/tagged/weaver.js"><span class="icon-question"></span> Previous questions</a> |
+				<a target="_blank" href="http://stackoverflow.com/questions/ask?tags=weaver.js"><span class="icon-comments"></span> Ask a code help question</a> |
+				<a target="_blank" href="https://github.com/maxkfranz/weaver/milestones"><span class="icon-calendar"></span> Version milestones/changelogs</a>
+			</div>
+
+			<div class="links likes">
+				<span class="like-label">Like Weaver.js?</span> |
+				<a target="_blank" href="https://github.com/maxkfranz/weaver"><span class="icon-star"></span> Star it on GitHub</a> |
+				<a target="_blank" href="https://twitter.com/intent/tweet?status=Weaver.js,%20concise%20and%20readable%20multitasking%20weaver.maxfranz.org"><span class="icon-twitter"></span> Share it on Twitter</a> |
+				<a target="_blank" href="https://plus.google.com/share?url=weaver.maxfranz.org"><span class="icon-google-plus"></span> Share it on Google+</a>
+			</div>
+
+			<div id="documentation">
+			{{#each sections}}
+				<h1 id="{{id}}">{{name}} {{{bookmark}}}</h1>
+
+				{{#if extensions}}
+					<ul>
+					{{#each extensions}}
+						<li><a target="_blank" href="{{url}}"><code>{{name}}</code></a> : {{descr}}</li>
+					{{/each}}
+					</ul>
+				{{/if}}
+
+				{{#if html}}
+					{{{html}}}
+				{{/if}}
+
+				{{#if demo}}
+
+					<div class="gallery-full-demo">			
+						<div class="gallery-full-padder"></div>
+
+						<a class="gallery-full-link" target="_blank" href="{{demo.viewUrl}}">
+							<span class="gallery-full-preview" style="background-image: url('{{demo.imgUrl}}');"></span>
+						</a>
+
+						<button class="run"><span class="icon-play"></span></button>
+						
+					</div>
+
+					{{#if demo.name}}
+						<div class="gallery-full-title">
+							<span class="gallery-full-name">{{demo.name}}</span>
+						</div>
+					{{/if}}
+
+				{{/if}}
+
+				{{#if demos}}
+
+					<div class="gallery-demos">
+					{{#each demos}}
+						<div class="gallery-demo">
+						
+							<a class="gallery-link" target="_blank" href="{{viewUrl}}">
+								<span class="gallery-preview" style="background-image: url('{{imgUrl}}');"></span>
+							</a>
+
+							<div class="gallery-title">
+								<span class="gallery-name">{{name}}</span>
+								<span class="gallery-download">
+									<a href="{{downloadUrl}}"><span class="icon-download-alt"></span></a>
+								</span>
+								<span class="gallery-github">
+									<a href="{{githubUrl}}"><span class="icon-github-alt"></span></a>
+								</span>
+							</div>
+							
+						</div>
+					{{/each}}
+					</div>
+
+				{{/if}}
+
+				{{#each sections}}
+				{{#if fromMd}}
+				{{else}}
+					<h2 id="{{id}}">{{name}} {{{bookmark}}}</h2>
+
+					{{#if html}}
+						{{{html}}}
+					{{/if}}
+
+					{{#if layout}}
+						{{#if demos}}
+							<div class="gallery-demos">
+								{{#each demos}}
+									<div class="gallery-demo">
+										<div class="gallery-title">
+											<span class="gallery-name">{{name}}</span>
+										</div>
+										
+										<a class="gallery-link" target="_blank" href="{{srcUrl}}">
+											<span class="gallery-preview" style="background-image: url('{{imgUrl}}');"></span>
+										</a>
+										
+									</div>
+								{{/each}}
+							</div>
+						{{/if}}
+
+						<h3>Options</h3>
+						<pre><code class="lang-js">{{{layout.optionsFormatted}}}</code></pre>
+						<button class="run run-inline-code"><span class="icon-play"></span></button>
+					{{/if}}
+
+					{{#each fns}}
+						<div class="function">
+							<div class="name" id="{{id}}"><span class="fn-name">{{name}}()</span> {{#if aliases}}et al{{/if}} {{{bookmark}}}</div>
+							
+							{{#if processedPureAliases}}
+							<div class="pure-aliases">
+								<span class="important-indicator"></span> Aliases:
+
+								{{#each processedPureAliases}}
+									<span class="pure-alias">
+										<code id="{{id}}" class="pure-alias-name">{{name}}()</code><span class="pure-alias-comma">,</span>
+									</span>
+								{{/each}}
+							</div>
+							{{/if}}
+							
+							<div class="descr">{{{descr}}}</div>
+
+							{{#if formats}}
+							<div class="formats">
+								{{#each formats}}
+									<div class="format">
+										{{#if args}}
+											<div class="name">{{name}}( <span class="args-summary">{{#each args}}{{#if optional}} [{{/if}}<span class="comma">, </span>{{{name}}}{{#if optional}}]{{/if}}{{/each}}</span> )</div>
+										{{else}}
+											<div class="name">{{name}}()</div>
+										{{/if}}
+
+										{{#if processedPureAliases}}
+										<div class="pure-aliases">
+											<span class="important-indicator"></span> Aliases:
+
+											{{#each processedPureAliases}}
+												<span class="pure-alias">
+													<span id="{{id}}" class="pure-alias-name">{{name}}()</span><span class="pure-alias-comma">,</span>
+												</span>
+											{{/each}}
+										</div>
+										{{/if}}
+										
+										<div class="descr">{{{descr}}}</div>
+										<ul class="args">
+											{{#each args}}
+												<li>
+													<span class="name">{{{linkedName}}}</span>
+													{{#if optional}}<span class="optional">[optional]</span>{{/if}} 
+													<span class="descr">{{{descr}}}</span>
+
+													{{#if fields}}
+													<ul class="fields">
+														{{#each fields}}
+															<li>
+																<span class="name">{{{linkedName}}}</span>
+																{{#if optional}}<span class="optional">[optional]</span>{{/if}} 
+																<span class="descr">{{{descr}}}</span>
+															</li>
+
+															{{#if fields}}
+															<ul class="fields">
+																{{#each fields}}
+																<li>
+																	<span class="name">{{{linkedName}}}</span>
+																	{{#if optional}}<span class="optional">[optional]</span>{{/if}} 
+																	<span class="descr">{{{descr}}}</span>
+																</li>
+																{{/each}}
+															</ul>
+															{{/if}}
+														{{/each}}
+													</ul>
+													{{/if}}
+												</li>
+											{{/each}}
+										</ul>
+									</div>
+								{{/each}}
+							</div>
+							{{/if}}
+
+							<div class="details">
+								{{#if html}}
+									{{{html}}}
+								{{/if}}
+							</div>		
+						</div>
+					{{/each}}
+
+				{{/if}}
+				{{/each}}
+			{{/each}}
+			</div>
+
+			<p><span class="icon-sign-blank"></span></p>
+
+		</div>
+
+
+		<div id="navigation">
+			<div class="toc">Table of contents (<a href="#top"><span class="icon-bookmark"></span> top</a>)</div>
+
+			{{#each sections}}
+				<div class="section lvl1">
+					{{#if sections}}<span class="expander">
+						<span class="icon-caret-down expanded-icon"></span>
+						<span class="icon-caret-right collapsed-icon"></span>
+					</span>{{/if}}
+					<a class="toclink" href="#{{id}}"><span class="icon-bookmark bookmark-icon"></span> {{& name}}</a>
+				</div>
+
+				{{#each sections}}
+					<div class="section lvl2">
+						{{#if fns}}<span class="expander">
+							<span class="icon-caret-down expanded-icon"></span>
+							<span class="icon-caret-right collapsed-icon"></span>
+						</span>{{/if}}
+						<a class="toclink" href="#{{id}}"><span class="icon-bookmark bookmark-icon"></span> {{& name}}</a>
+					</div>
+
+					{{#each fns}}
+						<div class="section lvl3"><a class="toclink" href="#{{id}}"><span class="icon-bookmark bookmark-icon"></span> {{name}}() {{#if aliases}}et al{{/if}}</a></div>
+					{{/each}}
+				{{/each}}
+			{{/each}}
+
+			<p><span class="icon-sign-blank"></span></p>
+		</div>
+
+
+		<div id="orphaned-cy-container">
+			<div id="cy-etc" class="hidden">
+				<div id="cy-arrow">
+					<span class="icon-arrow-down"></span>
+				</div>
+				<div id="cy-title"><pre class="content"></pre></div>
+				<div id="cy-label" class="hidden"><code>window.cy</code></div>
+				<div id="cy" class="hidden"></div>
+				<div id="cy-refresh" class="hidden">
+					<span class="link plain-link icon-refresh"></span>
+				</div>
+				<div id="cy-show">
+					<span class="link plain-link icon-plus"></span>
+				</div>
+				<div id="cy-hide" class="hidden">
+					<span class="link plain-link icon-minus"></span>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- inject:js -->
+		<script src="js/fastclick.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/weaver.js"></script>
+		<script src="js/script.js"></script>
+		<!-- endinject -->
+
+	</body>
+</html>
