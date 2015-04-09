@@ -1,43 +1,24 @@
-# Cytoscape.js
+# Weaver.js
 
 
 
 
 ## Documentation
 
-You can find the documentation and downloads on the [project website](http://js.cytoscape.org).
+You can find the documentation and downloads on the [project website](http://weaver.maxfranz.org).
 
-If you're looking to get an old version of the library, you can build off the associated tag or you can [browse the list of old builds](http://cytoscape.github.io/cytoscape.js/download/).  We very strongly recommend you use the latest version.  If you run into a bug on the latest version, report it on [the issue tracker](https://github.com/cytoscape/cytoscape.js/issues).  We'll try to fix the bug as soon as possible, and we'll give you a snapshot build that includes the fix for you to use until the next official bugfix release.
-
-
+If you're looking to get an old version of the library, you can build off the associated tag or you can [browse the list of old builds](http://weaver.maxfranz.org/download/).  We very strongly recommend you use the latest version.  If you run into a bug on the latest version, report it on [the issue tracker](https://github.com/maxkfranz/weaver/issues).  We'll try to fix the bug as soon as possible, and we'll give you a snapshot build that includes the fix for you to use until the next official bugfix release.
 
 
-## Contributing to Cytoscape.js
 
-Cytoscape.js is an open source project, and anyone interested is encouraged to contribute to Cytoscape.js.  We gladly accept pull requests.  If you are interested in regular contributions to Cytoscape.js, then we can arrange granting you permission to the repository by [contacting us](mailto:cytoscape-discuss@googlegroups.com?subject=Granting permission to Cytoscape.js repository).
+
+## Contributing to Weaver.js
+
+Weaver.js is an open source project, and anyone interested is encouraged to contribute to Weaver.js.  We gladly accept pull requests.  If you are interested in regular contributions to Weaver.js, then we can arrange granting you permission to the repository by [contacting us](mailto:cytoscape-discuss@googlegroups.com?subject=Granting permission to Weaver.js repository).
 
 If your pull request is a bugfix, please make changes to the master branch.  Otherwise, please make changes to the next version's branch (i.e. unstable).
 
 
-
-## Authors
-
-The list of all code contributions to Cytoscape.js can be found in the [Contributors](https://github.com/cytoscape/cytoscape.js/graphs/contributors) section on GitHub.
-
-
-## Acknowledgements
-
-CoSE is a layout in Cytoscape.js.  It's one of the best force-directed layouts in Cytoscape.js in its own right, and it's excellent at arranging compound graphs.  CoSE was implemented by [Gerardo Huck](http://linkedin.com/in/gerardohuck/) and based on an article, ["A layout algorithm for undirected compound graphs"](http://dl.acm.org/citation.cfm?id=1498047&CFID=429377863&CFTOKEN=94691144).
-
-Cola.js is a layout in Cytoscape.js, and it is one of the best force-directed layouts in Cytoscape.js.  [Cola.js](http://marvl.infotech.monash.edu/webcola/) is the work of [Tim Dwyer](http://www.csse.monash.edu.au/~tdwyer/) at the [Monash Adaptive Visualisation Lab](http://marvl.infotech.monash.edu/).
-
-Dagre is a layout in Cytoscape.js, and it's an excellent way to arrange trees and DAGs.  [Dagre](https://github.com/cpettitt/dagre) is the work of [Chris Pettitt](https://www.linkedin.com/in/chrismpettitt).
-
-Arbor is used in one of Cytoscape.js' included layouts.  We made some modifications to the library, written by Samizdat Drafting Co., so that it would work with multiple instances of Cytoscape.js and that it would work on lesser browsers, like IE.  Information about this library can be found at the [Arbor website](http://arborjs.org/) and on [GitHub](https://github.com/maxkfranz/arbor) where the original code was forked.
-
-Springy.js is a layout in Cytoscape.js.  [Springy.js](http://getspringy.com) is the work of [Dennis Hotson](http://dhotson.tumblr.com/).
-
-Note: Cytoscape.js does not include any of these libraries directly but allows use of them as layouts if they are included in your app.
 
 
 
@@ -89,8 +70,8 @@ Run `gulp` in the console.  The main targets are:
  * `sniper` : runs a BioJS sniper server that hosts demos
  * `docsmin` : build the documentation template with all resources minified
  * `docspub` : build the documentation for publishing (ZIPs, JS refs, etc.)
- * `docspush` : push the built documentation to [js.cytoscape.org](http://js.cytoscape.org)
- * `unstabledocspush` : push the built documentation to [js.cytoscape.org/unstable](http://js.cytoscape.org/unstable)
+ * `docspush` : push the built documentation to production
+ * `unstabledocspush` : push the built documentation to unstable
 
 
 
@@ -111,24 +92,6 @@ Run `gulp` in the console.  The main targets are:
 
 ## Tests
 
-Mocha tests are found in the [test directory](https://github.com/cytoscape/cytoscape.js/tree/master/test).  The tests can be run in the browser or they can be run via Node.js (`gulp test`).
-
-
-
-
-## Funding
-
-Funding for Cytoscape.js and Cytoscape is provided by NRNB (U.S. National Institutes of Health, National Center for Research Resources grant numbers P41 RR031228 and GM103504) and by NIH grants 2R01GM070743 and 1U41HG006623. The following organizations help develop Cytoscape:
-
-[ISB](http://www.systemsbiology.org) | 
-[UCSD](http://www.ucsd.edu) | 
-[MSKCC](http://cbio.mskcc.org) | 
-[Pasteur](http://www.pasteur.fr) | 
-[Agilent](http://www.agilent.com/) | 
-[UCSF](http://www.ucsf.edu/) |
-[Unilever](http://www.unilever.com) |
-[Toronto](http://www.utoronto.ca) |
-[NCIBI](http://portal.ncibi.org/gateway/index.html) |
-[NRNB](http://nrnb.org)
+Mocha tests are found in the [test directory](https://github.com/cytoscape/weaver.js/tree/master/test).  The tests can be run in the browser or they can be run via Node.js (`gulp test`).
 
 
