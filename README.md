@@ -66,8 +66,6 @@ Run `gulp` in the console.  The main targets are:
 
 **Documentation:**
  * `docs` : build the documentation template
- * `docsdemoshots` : get snapshots of demos referenced in the docs (requires PhantomJS, e.g. `brew update && brew install phantomjs`)
- * `sniper` : runs a BioJS sniper server that hosts demos
  * `docsmin` : build the documentation template with all resources minified
  * `docspub` : build the documentation for publishing (ZIPs, JS refs, etc.)
  * `docspush` : push the built documentation to production
