@@ -1,4 +1,4 @@
-# Weaver.js
+# Weaver.js  [![JS.ORG](https://img.shields.io/badge/js.org-weaver-ffb400.svg?style=flat-square)](http://js.org)
 
 
 
