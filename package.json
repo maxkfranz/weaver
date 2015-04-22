@@ -55,5 +55,8 @@
   },
   "spm": {
     "main": "dist/weaver.js"
-  }
+  },
+  "scripts": {
+    "test": "./node_modules/gulp/bin/gulp.js test"
+  },
 }
