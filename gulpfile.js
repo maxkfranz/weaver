@@ -27,9 +27,9 @@ var paths = {
     'src/preamble.js',
     'src/namespace.js',
     'src/promise.js',
-    'src/is.js', 
-    'src/util.js', 
-    'src/math.js',  
+    'src/is.js',
+    'src/util.js',
+    'src/math.js',
     'src/event.js',
     'src/define.js',
     'src/thread.js',
@@ -40,7 +40,7 @@ var paths = {
   nodethreadSrc: [
     'src/preamble.js',
     'src/thread-node-fork.js'
-  ], 
+  ],
 
   docs: {
     js: [
@@ -61,7 +61,7 @@ var paths = {
 
 
 gulp.task('default', ['build'], function(){
-  
+
 });
 
 gulp.task('version', function( next ){
@@ -84,7 +84,7 @@ gulp.task('version', function( next ){
 
     next();
   }
-  
+
 });
 
 gulp.task('clean', function(){
@@ -96,9 +96,9 @@ gulp.task('clean', function(){
 gulp.task('concat', ['version', 'nodeworker'], function(){
   return gulp.src( paths.sources )
     .pipe( replace('{{VERSION}}', version) )
-    
+
     .pipe( concat('weaver.js') )
-    
+
     .pipe( gulp.dest('build') )
   ;
 });
@@ -106,11 +106,11 @@ gulp.task('concat', ['version', 'nodeworker'], function(){
 gulp.task('build', ['version', 'nodeworker'], function(){
   return gulp.src( paths.sources )
     .pipe( replace('{{VERSION}}', version) )
-    
+
     .pipe( concat('weaver.js') )
-    
+
     .pipe( gulp.dest('build') )
-    
+
     .pipe( uglify({
       mangle: true,
 
@@ -118,7 +118,7 @@ gulp.task('build', ['version', 'nodeworker'], function(){
     }) )
 
     .pipe( concat('weaver.min.js') )
-    
+
     .pipe( gulp.dest('build') )
   ;
 });
@@ -126,9 +126,9 @@ gulp.task('build', ['version', 'nodeworker'], function(){
 gulp.task('nodeworker', function(){
   return gulp.src( paths.nodethreadSrc )
     .pipe( replace('{{VERSION}}', version) )
-    
+
     .pipe( concat(paths.nodethreadName) )
-    
+
     .pipe( gulp.dest('build') )
   ;
 });
@@ -225,7 +225,7 @@ gulp.task('docsbuildlist', ['docsdl'], function(next){
 
     next();
   });
-  
+
 });
 
 gulp.task('snapshotpush', ['docsdl'], shell.task([
@@ -241,7 +241,7 @@ gulp.task('docs', function(next){
 
     next();
   } );
-  
+
 });
 
 gulp.task('docsmin', function(next){
@@ -268,7 +268,7 @@ gulp.task('docshtmlmin', function(){
 gulp.task('docsjsmin', function(){
   return gulp.src( paths.docs.js )
     .pipe( concat('all.min.js') )
-    
+
     .pipe( uglify({
       mangle: true
     }) )
@@ -277,7 +277,7 @@ gulp.task('docsjsmin', function(){
   ;
 });
 
-gulp.task('docscssmin', function(){ 
+gulp.task('docscssmin', function(){
   return gulp.src( paths.docs.css )
     .pipe( concat('all.min.css') )
 
@@ -368,7 +368,7 @@ gulp.task('unstabledocspush', shell.task([
 // browserify debug build
 gulp.task('browserify', ['build'], function(){
   var b = browserify({ debug: true, hasExports: true });
-  
+
   b.add('./build/weaver.js', { expose: "weaver" });
 
   return b.bundle()
@@ -379,6 +379,14 @@ gulp.task('browserify', ['build'], function(){
 
 gulp.task('npm', shell.task([
   './publish-npm.sh'
+]));
+
+gulp.task('meteor', shell.task([
+  './publish-meteor.sh'
+]));
+
+gulp.task('spm', shell.task([
+  './publish-spm.sh'
 ]));
 
 gulp.task('watch', function(next){

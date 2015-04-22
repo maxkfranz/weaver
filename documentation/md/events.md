@@ -12,9 +12,7 @@ Fields:
 
 ## Thread events
 
-TODO
-
- * `blah` : TODO
- * `blah` : TODO
- * `blah` : TODO
-
+ * `run` : when a thread starts a run
+ * `ran` : when a thread ends a run
+ * `stop` : when a thread is stopped (i.e. terminated and no longer usable)
+ * `message` : when a thread receives a message

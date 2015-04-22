@@ -4,12 +4,15 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 		<link rel="canonical" href="http://js.cytoscape.org" />
-		<meta name="description" content="Concise and readable multitasking (compatible with CommonJS/Node.js/io.js, AMD/Require.js, Bower, npm, and plain JavaScript)">
+		<meta name="description" content="Concise and readable multitasking (compatible with CommonJS/Node.js/io.js, AMD/Require.js, npm, Bower, spm, Meteor, and plain JavaScript)">
 		<meta name="author" content="Max Franz">
 		<meta name="robots" content="all" />
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimal-ui">
 
 		<title>Weaver.js</title>
+
+		<link rel="shortcut icon" href="img/favicon.ico" />
+		<link rel="shortcut icon" type="image/svg" href="img/logo.svg" />
 
 		<!-- inject:css -->
 		<link rel="stylesheet" href="css/reset.css">
@@ -17,20 +20,32 @@
 		<link rel="stylesheet" href="css/highlight/github.css">
 		<link rel="stylesheet" href="css/style.css">
 		<!-- endinject -->
-		
+
 	</head>
 
 	<body>
 
 		<div id="content">
 
+			<div id="open-navigation" class="activatable"><span class="icon-reorder"></span></div>
+			<div id="open-navigation-bg"></div>
+
 			<h1 id="top" class="title">Weaver.js</h1>
-			<div class="subtitle">Concise and readable multitasking (compatible with <a target="_blank" href="http://wiki.commonjs.org/wiki/CommonJS">CommonJS</a>/<a target="_blank" href="http://nodejs.org/">Node.js</a>/<a target="_blank" href="http://iojs.org/">io.js</a>, <a target="_blank" href="http://requirejs.org">AMD/Require.js</a>, <a target="_blank" href="http://bower.io">Bower</a>, <a target="_blank" href="http://npmjs.org">npm</a>, and plain JavaScript)</div>
-			
+			<div class="subtitle">Concise and readable multitasking
+				(compatible with
+				<a target="_blank" href="http://wiki.commonjs.org/wiki/CommonJS">CommonJS</a>/<a target="_blank" href="http://nodejs.org/">Node.js</a>/<a target="_blank" href="http://iojs.org/">io.js</a>,
+				<a target="_blank" href="http://requirejs.org">AMD/Require.js</a>,
+				<a target="_blank" href="http://npmjs.org">npm</a>,
+				<a target="_blank" href="http://bower.io">Bower</a>,
+				<a target="_blank" href="http://spmjs.io">spm</a>,
+				<a target="_blank" href="https://meteor.com">Meteor</a>,
+				and plain JavaScript)
+			</div>
+
 			<div class="buttons-subtitle">
 				<a class="button green" target="_blank" href="https://github.com/maxkfranz/weaver"><span class="icon-github-alt"></span> GitHub</a>
 
-				<a id="download-button" class="button green" href="download/weaver.js-1.0.0.zip"><span class="icon-download-alt"></span> Download 1.0.0</a>
+				<a id="download-button" class="button green" href="download/weaver.js-1.0.0-pre.zip"><span class="icon-download-alt"></span> Download 1.0.0-pre</a>
 			</div>
 
 			<div class="links">
@@ -44,8 +59,8 @@
 			<div class="links likes">
 				<span class="like-label">Like Weaver.js?</span> |
 				<a target="_blank" href="https://github.com/maxkfranz/weaver"><span class="icon-star"></span> Star it on GitHub</a> |
-				<a target="_blank" href="https://twitter.com/intent/tweet?status=Weaver.js,%20concise%20and%20readable%20multitasking%20weaver.maxfranz.org"><span class="icon-twitter"></span> Share it on Twitter</a> |
-				<a target="_blank" href="https://plus.google.com/share?url=weaver.maxfranz.org"><span class="icon-google-plus"></span> Share it on Google+</a>
+				<a target="_blank" href="https://twitter.com/intent/tweet?status=Weaver.js,%20concise%20and%20readable%20multitasking%20weaver.js.org"><span class="icon-twitter"></span> Share it on Twitter</a> |
+				<a target="_blank" href="https://plus.google.com/share?url=weaver.js.org"><span class="icon-google-plus"></span> Share it on Google+</a>
 			</div>
 
 			<div id="documentation">
@@ -66,6 +81,8 @@
 <li>AMD/Require.js</li>
 <li>npm</li>
 <li>bower</li>
+<li>spm</li>
+<li>meteor/atmosphere</li>
 </ul>
 </li>
 <li>Has a full suite of unit tests that can be run in the browser or the terminal</li>
@@ -81,7 +98,7 @@
 <h2 id="introduction/about">About <a href="#introduction/about"><span class="icon-bookmark"></span></a></h2>
 <p>Weaver.js is an open-source multitasking library written in JavaScript.  You can use Weaver.js for speeding up your code where parallelisation applies.</p>
 <p>Weaver.js is an open-source project, and anyone is free to contribute.  For more information, refer to the <a href="https://github.com/maxkfranz/weaver">GitHub README</a>.</p>
-<p>Weaver.js was developed by <a href="http://maxfranz.org">Max Franz</a>.</p>
+<p>Weaver.js was designed and developed by <a href="http://maxfranz.org">Max Franz</a>.</p>
 
 				
 
@@ -112,11 +129,11 @@
 <li><code>timeStamp</code> : Unix epoch time of event</li>
 </ul>
 <h2 id="events/thread-events">Thread events <a href="#events/thread-events"><span class="icon-bookmark"></span></a></h2>
-<p>TODO</p>
 <ul>
-<li><code>blah</code> : TODO</li>
-<li><code>blah</code> : TODO</li>
-<li><code>blah</code> : TODO</li>
+<li><code>run</code> : when a thread starts a run</li>
+<li><code>ran</code> : when a thread ends a run</li>
+<li><code>stop</code> : when a thread is stopped (i.e. terminated and no longer usable)</li>
+<li><code>message</code> : when a thread receives a message</li>
 </ul>
 
 				
@@ -166,9 +183,9 @@
 					
 						<div class="function">
 							<div class="name" id="thread/globals/resolve"><span class="fn-name">resolve()</span>  <a href="#thread/globals/resolve"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Resolves the thread&#39;s run promise with a single value such that other entities (like the main JS thread or other threads) can read it.</p>
 </div>
 
@@ -191,14 +208,14 @@ t.promise(<span class="hljs-function"><span class="hljs-keyword">function</span>
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/globals/reject"><span class="fn-name">reject()</span>  <a href="#thread/globals/reject"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Rejects the thread&#39;s run promise with a single error value such that other entities (like the main JS thread or other threads) can read it.</p>
 </div>
 
@@ -224,14 +241,14 @@ t.promise(<span class="hljs-function"><span class="hljs-keyword">function</span>
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/globals/listen"><span class="fn-name">listen()</span>  <a href="#thread/globals/listen"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Listen to messages sent to the thread.</p>
 </div>
 
@@ -244,13 +261,13 @@ t.promise(<span class="hljs-function"><span class="hljs-keyword">function</span>
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function(msg)</span>
-													 
+													
 													<span class="descr"><p>A function that is called when a message, <code>msg</code>, is received.</p>
 </span>
 
@@ -288,12 +305,12 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/globals/broadcast"><span class="fn-name">broadcast()</span>  <a href="#thread/globals/broadcast"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -305,7 +322,7 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Broadcast a message to entities who are listening to the thread.</p>
 </div>
 
@@ -318,13 +335,13 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">msg</span>
-													 
+													
 													<span class="descr"><p>A message, e.g. JSON object or string, that is broadcasted.</p>
 </span>
 
@@ -362,7 +379,7 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 
@@ -378,9 +395,9 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 					
 						<div class="function">
 							<div class="name" id="thread/execution/thread.require"><span class="fn-name">thread.require()</span>  <a href="#thread/execution/thread.require"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Require a named function into the thread, giving the thread a global reference to the function.  Plain objects or simple objects with a prototype (that can be inpected and serialised live) are also supported.</p>
 </div>
 
@@ -393,13 +410,13 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">obj</span>
-													 
+													
 													<span class="descr"><p>The named function or simple object to require that is serialised and copied to the thread.</p>
 </span>
 
@@ -408,7 +425,7 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 											
 												<li>
 													<span class="name">as</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>The name of the object as available in the thread.  This is mandatory for an object that is not a named function, because its name can not be automatically inferred.</p>
 </span>
 
@@ -451,14 +468,14 @@ t.on(<span class="hljs-string">'message'</span>, <span class="hljs-function"><sp
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/execution/thread.pass"><span class="fn-name">thread.pass()</span>  <a href="#thread/execution/thread.pass"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Pass data to the thread such that it is accessible within <code>thread.run()</code> etc callback functions.</p>
 </div>
 
@@ -471,13 +488,13 @@ t.on(<span class="hljs-string">'message'</span>, <span class="hljs-function"><sp
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">passed</span>
-													 
+													
 													<span class="descr"><p>JSON serialisable data that is passed to <code>thread.run()</code>.</p>
 </span>
 
@@ -510,12 +527,12 @@ t.pass( { foo: <span class="hljs-number">1</span>, bar: <span class="hljs-number
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/execution/thread.run"><span class="fn-name">thread.run()</span>  <a href="#thread/execution/thread.run"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -527,7 +544,7 @@ t.pass( { foo: <span class="hljs-number">1</span>, bar: <span class="hljs-number
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Run the specified function in the thread, returning a promise that is resolved when the thread calls <a href="#thread/globals/resolve"><code>resolve()</code></a> or when the specified function returns a value.</p>
 </div>
 
@@ -540,13 +557,13 @@ t.pass( { foo: <span class="hljs-number">1</span>, bar: <span class="hljs-number
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function( passed )</span>
-													 
+													
 													<span class="descr"><p>The function which will be copied and run in the thread.</p>
 </span>
 
@@ -576,14 +593,14 @@ t.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/execution/thread.map"><span class="fn-name">thread.map()</span>  <a href="#thread/execution/thread.map"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Get a mapping from the thread using the specified mapping function that uses <a href="#thread/globals/resolve"><code>resolve()</code></a> or a return value to specify the mapped value for each element.</p>
 </div>
 
@@ -596,13 +613,13 @@ t.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function( currVal, index, array )</span>
-													 
+													
 													<span class="descr"><p>A mapping function that specifies the resultant mapped value via <code>resolve()</code> or a return value.</p>
 </span>
 
@@ -611,7 +628,7 @@ t.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 														
 															<li>
 																<span class="name">currVal</span>
-																 
+																
 																<span class="descr"><p>The current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -620,7 +637,7 @@ t.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 														
 															<li>
 																<span class="name">index</span>
-																<span class="optional">[optional]</span> 
+																<span class="optional">[optional]</span>
 																<span class="descr"><p>The index of the current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -629,7 +646,7 @@ t.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 														
 															<li>
 																<span class="name">array</span>
-																<span class="optional">[optional]</span> 
+																<span class="optional">[optional]</span>
 																<span class="descr"><p>The passed array <code>map()</code> was called upon.</p>
 </span>
 															</li>
@@ -661,14 +678,14 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/execution/thread.reduce"><span class="fn-name">thread.reduce()</span>  <a href="#thread/execution/thread.reduce"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  THe function specifies the resultant value via <a href="#thread/globals/resolve"><code>resolve()</code></a> or a return value.</p>
 </div>
 
@@ -681,13 +698,13 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function( prevVal, currVal, index, array )</span>
-													 
+													
 													<span class="descr"><p>The accumulator function.</p>
 </span>
 
@@ -696,7 +713,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">prevVal</span>
-																 
+																
 																<span class="descr"><p>The value previously returned in the last invocation of the accumulator function, or initVal if supplied.</p>
 </span>
 															</li>
@@ -705,7 +722,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">currVal</span>
-																 
+																
 																<span class="descr"><p>The current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -714,7 +731,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">index</span>
-																 
+																
 																<span class="descr"><p>The index of the current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -723,7 +740,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">array</span>
-																 
+																
 																<span class="descr"><p>The passed array <code>reduce()</code> was called upon.</p>
 </span>
 															</li>
@@ -736,7 +753,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 											
 												<li>
 													<span class="name">initVal</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>Value to use as the first argument to the first call of the accumulator function.</p>
 </span>
 
@@ -751,14 +768,14 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 
 							<div class="details">
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/execution/thread.reduceRight"><span class="fn-name">thread.reduceRight()</span>  <a href="#thread/execution/thread.reduceRight"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  THe function specifies the resultant value via <a href="#thread/globals/resolve"><code>resolve()</code></a> or a return value.</p>
 </div>
 
@@ -771,13 +788,13 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function( prevVal, currVal, index, array )</span>
-													 
+													
 													<span class="descr"><p>The accumulator function.</p>
 </span>
 
@@ -786,7 +803,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">prevVal</span>
-																 
+																
 																<span class="descr"><p>The value previously returned in the last invocation of the accumulator function, or initVal if supplied.</p>
 </span>
 															</li>
@@ -795,7 +812,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">currVal</span>
-																 
+																
 																<span class="descr"><p>The current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -804,7 +821,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">index</span>
-																 
+																
 																<span class="descr"><p>The index of the current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -813,7 +830,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">array</span>
-																 
+																
 																<span class="descr"><p>The passed array <code>reduceRight()</code> was called upon.</p>
 </span>
 															</li>
@@ -826,7 +843,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 											
 												<li>
 													<span class="name">initVal</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>Value to use as the first argument to the first call of the accumulator function.</p>
 </span>
 
@@ -841,12 +858,12 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 
 							<div class="details">
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/execution/thread.stop"><span class="fn-name">thread.stop()</span>  <a href="#thread/execution/thread.stop"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -862,7 +879,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Terminates the thread such that it no longer runs.</p>
 </div>
 
@@ -870,14 +887,14 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 
 							<div class="details">
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/execution/thread.stopped"><span class="fn-name">thread.stopped()</span>  <a href="#thread/execution/thread.stopped"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Get whether the thread is stopped (i.e. terminated via <code>thread.stop()</code>).</p>
 </div>
 
@@ -885,7 +902,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 
 							<div class="details">
 								
-							</div>		
+							</div>
 						</div>
 					
 
@@ -904,9 +921,9 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 					
 						<div class="function">
 							<div class="name" id="thread/events/thread.message"><span class="fn-name">thread.message()</span>  <a href="#thread/events/thread.message"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Send the thread a message.</p>
 </div>
 
@@ -919,13 +936,13 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">msg</span>
-													 
+													
 													<span class="descr"><p>The message (e.g. JSON object or string) to send to the thread.</p>
 </span>
 
@@ -963,12 +980,12 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/events/thread.on"><span class="fn-name">thread.on()</span>  <a href="#thread/events/thread.on"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -988,7 +1005,7 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Bind to events that are emitted by the thread.</p>
 </div>
 
@@ -1001,13 +1018,13 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">events</a></span>
-													 
+													
 													<span class="descr"><p>A space separated list of event names.</p>
 </span>
 
@@ -1016,7 +1033,7 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 											
 												<li>
 													<span class="name">data</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>A plain object which is passed to the handler in the event object argument.</p>
 </span>
 
@@ -1025,7 +1042,7 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 											
 												<li>
 													<span class="name">function(evt)</span>
-													 
+													
 													<span class="descr"><p>The handler function that is called when one of the specified events occurs.</p>
 </span>
 
@@ -1034,7 +1051,7 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 														
 															<li>
 																<span class="name">evt</span>
-																 
+																
 																<span class="descr"><p>The event object.</p>
 </span>
 															</li>
@@ -1054,13 +1071,13 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">eventsMap</a></span>
-													 
+													
 													<span class="descr"><p>A map of event names to handler functions.</p>
 </span>
 
@@ -1069,7 +1086,7 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 											
 												<li>
 													<span class="name">data</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>A plain object which is passed to the handler in the event object argument.</p>
 </span>
 
@@ -1084,12 +1101,29 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 
 							<div class="details">
 								
-							</div>		
+									<h3 id="examples">Examples</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> t = weaver.thread();
+
+t.on(<span class="hljs-string">'run'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'run'</span>);
+});
+
+t.pass([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]).run(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( arr )</span></span>{
+  <span class="hljs-keyword">return</span> arr[<span class="hljs-number">0</span>] + arr[arr.length - <span class="hljs-number">1</span>];
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( res )</span></span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'got run response: '</span> + res);
+
+  t.stop();
+});
+</code></pre>
+<button class="run run-inline-code"><span class="icon-play"></span></button>
+								
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/events/thread.promiseOn"><span class="fn-name">thread.promiseOn()</span>  <a href="#thread/events/thread.promiseOn"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -1101,7 +1135,7 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Get a promise that is resolved when the first of any of the specified events is triggered on the thread.</p>
 </div>
 
@@ -1114,13 +1148,13 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">events</a></span>
-													 
+													
 													<span class="descr"><p>A space separated list of event names.</p>
 </span>
 
@@ -1150,14 +1184,14 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/events/thread.one"><span class="fn-name">thread.one()</span>  <a href="#thread/events/thread.one"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Bind to events that are emitted by the thread, and trigger the handler only once.</p>
 </div>
 
@@ -1170,13 +1204,13 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">events</a></span>
-													 
+													
 													<span class="descr"><p>A space separated list of event names.</p>
 </span>
 
@@ -1185,7 +1219,7 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 											
 												<li>
 													<span class="name">data</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>A plain object which is passed to the handler in the event object argument.</p>
 </span>
 
@@ -1194,7 +1228,7 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 											
 												<li>
 													<span class="name">function(evt)</span>
-													 
+													
 													<span class="descr"><p>The handler function that is called when one of the specified events occurs.</p>
 </span>
 
@@ -1203,7 +1237,7 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 														
 															<li>
 																<span class="name">evt</span>
-																 
+																
 																<span class="descr"><p>The event object.</p>
 </span>
 															</li>
@@ -1223,13 +1257,13 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">eventsMap</a></span>
-													 
+													
 													<span class="descr"><p>A map of event names to handler functions.</p>
 </span>
 
@@ -1238,7 +1272,7 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 											
 												<li>
 													<span class="name">data</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>A plain object which is passed to the handler in the event object argument.</p>
 </span>
 
@@ -1253,12 +1287,35 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 
 							<div class="details">
 								
-							</div>		
+									<h3 id="examples">Examples</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> t = weaver.thread();
+
+t.one(<span class="hljs-string">'run'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'run (once)'</span>);
+});
+
+t.run(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'some response'</span>;
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( res )</span></span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'got run x1 response: '</span> + res);
+
+  <span class="hljs-keyword">return</span> t.run(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'some other message'</span>;
+  });
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( res )</span></span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'got run x2 response: '</span> + res);
+
+  t.stop();
+});
+</code></pre>
+<button class="run run-inline-code"><span class="icon-play"></span></button>
+								
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/events/thread.off"><span class="fn-name">thread.off()</span>  <a href="#thread/events/thread.off"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -1278,7 +1335,7 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Remove event handlers on the thread.</p>
 </div>
 
@@ -1291,13 +1348,13 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">events</a></span>
-													 
+													
 													<span class="descr"><p>A space separated list of event names.</p>
 </span>
 
@@ -1306,7 +1363,7 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 											
 												<li>
 													<span class="name">handler</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>A reference to the handler function to remove.</p>
 </span>
 
@@ -1322,13 +1379,13 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">eventsMap</a></span>
-													 
+													
 													<span class="descr"><p>A map of event names to handler functions to remove.</p>
 </span>
 
@@ -1343,12 +1400,35 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 
 							<div class="details">
 								
-							</div>		
+									<h3 id="examples">Examples</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> t = weaver.thread();
+
+t.on(<span class="hljs-string">'run'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'run'</span>);
+});
+
+t.run(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'the first response'</span>;
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">( res )</span></span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'got run response: '</span> + res);
+
+  t.off(<span class="hljs-string">'run'</span>); <span class="hljs-comment">// so the 2nd one isn't triggered...</span>
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-keyword">return</span> t.run(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'the second response'</span>;
+  });
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  t.stop();
+});
+</code></pre>
+<button class="run run-inline-code"><span class="icon-play"></span></button>
+								
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="thread/events/thread.trigger"><span class="fn-name">thread.trigger()</span>  <a href="#thread/events/thread.trigger"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -1360,7 +1440,7 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Trigger one or more events on the thread.</p>
 </div>
 
@@ -1373,13 +1453,13 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">events</a></span>
-													 
+													
 													<span class="descr"><p>A space separated list of event names to trigger.</p>
 </span>
 
@@ -1388,7 +1468,7 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 											
 												<li>
 													<span class="name">extraParams</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>An array of additional parameters to pass to the handler.</p>
 </span>
 
@@ -1403,7 +1483,18 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 
 							<div class="details">
 								
-							</div>		
+									<h3 id="examples">Examples</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> t = weaver.thread();
+
+t.on(<span class="hljs-string">'foo'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'foo!'</span>);
+});
+
+t.trigger(<span class="hljs-string">'foo'</span>);
+</code></pre>
+<button class="run run-inline-code"><span class="icon-play"></span></button>
+								
+							</div>
 						</div>
 					
 
@@ -1439,9 +1530,9 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 					
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.require"><span class="fn-name">fabric.require()</span>  <a href="#fabric/execution/fabric.require"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Require a named function into each thread in the fabric, giving a global reference to the function.  Plain objects or simple objects with a prototype (that can be inpected and serialised live) are also supported.</p>
 </div>
 
@@ -1454,13 +1545,13 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">obj</span>
-													 
+													
 													<span class="descr"><p>The named function or simple object to require that is serialised and copied to the fabric.</p>
 </span>
 
@@ -1469,7 +1560,7 @@ thread.run(<span class="hljs-function"><span class="hljs-keyword">function</span
 											
 												<li>
 													<span class="name">as</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>The name of the object as available in the fabric.  This is mandatory for an object that is not a named function, because its name can not be automatically inferred.</p>
 </span>
 
@@ -1501,14 +1592,14 @@ f.require( plusplus ).pass([ <span class="hljs-number">1</span>, <span class="hl
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.pass"><span class="fn-name">fabric.pass()</span>  <a href="#fabric/execution/fabric.pass"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Pass data to the fabric such that it is accessible within <code>fabric.spread()</code> etc callback functions.</p>
 </div>
 
@@ -1521,13 +1612,13 @@ f.require( plusplus ).pass([ <span class="hljs-number">1</span>, <span class="hl
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">passed</span>
-													 
+													
 													<span class="descr"><p>JSON serialisable data that is passed to functions like <code>fabric.spread()</code>.</p>
 </span>
 
@@ -1555,14 +1646,14 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.random"><span class="fn-name">fabric.random()</span>  <a href="#fabric/execution/fabric.random"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Get a random thread from the fabric.</p>
 </div>
 
@@ -1583,12 +1674,12 @@ f.random().run(<span class="hljs-function"><span class="hljs-keyword">function</
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.run"><span class="fn-name">fabric.run()</span>  <a href="#fabric/execution/fabric.run"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -1600,7 +1691,7 @@ f.random().run(<span class="hljs-function"><span class="hljs-keyword">function</
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Run the specified function in a random thread of the fabric, returning a promise that is resolved when the thread calls <a href="#fabric/globals/resolve"><code>resolve()</code></a> or when the specified function returns a value.</p>
 </div>
 
@@ -1613,13 +1704,13 @@ f.random().run(<span class="hljs-function"><span class="hljs-keyword">function</
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function( passed )</span>
-													 
+													
 													<span class="descr"><p>The function which will be copied and run in the fabric.</p>
 </span>
 
@@ -1647,14 +1738,14 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.map"><span class="fn-name">fabric.map()</span>  <a href="#fabric/execution/fabric.map"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Get a mapping from the fabric using the specified mapping function that uses <a href="#fabric/globals/resolve"><code>resolve()</code></a> or a return value to specify the mapped value for each element.</p>
 </div>
 
@@ -1667,13 +1758,13 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function( currVal, index, array )</span>
-													 
+													
 													<span class="descr"><p>A mapping function that specifies the resultant mapped value via <code>resolve()</code> or a return value.</p>
 </span>
 
@@ -1682,7 +1773,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 														
 															<li>
 																<span class="name">currVal</span>
-																 
+																
 																<span class="descr"><p>The current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -1691,7 +1782,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 														
 															<li>
 																<span class="name">index</span>
-																<span class="optional">[optional]</span> 
+																<span class="optional">[optional]</span>
 																<span class="descr"><p>The index of the current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -1700,7 +1791,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 														
 															<li>
 																<span class="name">array</span>
-																<span class="optional">[optional]</span> 
+																<span class="optional">[optional]</span>
 																<span class="descr"><p>The passed array <code>map()</code> was called upon.</p>
 </span>
 															</li>
@@ -1732,14 +1823,14 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.filter"><span class="fn-name">fabric.filter()</span>  <a href="#fabric/execution/fabric.filter"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Filters the passed array, giving a resultant array that contains the elements which pass the specified test function.  The test function returns or <a href="#fabric/globals/resolve"><code>resolve()</code>s</a> to specify the test result.</p>
 </div>
 
@@ -1752,13 +1843,13 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function( currVal, index, array )</span>
-													 
+													
 													<span class="descr"><p>The test function that returns or <code>resolve()</code>s a truthy value to specify whether the specified value passes the test.</p>
 </span>
 
@@ -1767,7 +1858,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">currVal</span>
-																 
+																
 																<span class="descr"><p>The current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -1776,7 +1867,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">index</span>
-																<span class="optional">[optional]</span> 
+																<span class="optional">[optional]</span>
 																<span class="descr"><p>The index of the current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -1785,7 +1876,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">array</span>
-																<span class="optional">[optional]</span> 
+																<span class="optional">[optional]</span>
 																<span class="descr"><p>The passed array <code>filter()</code> was called upon.</p>
 </span>
 															</li>
@@ -1817,14 +1908,14 @@ f.pass([ -<span class="hljs-number">2</span>, -<span class="hljs-number">1</span
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.reduce"><span class="fn-name">fabric.reduce()</span>  <a href="#fabric/execution/fabric.reduce"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  THe function specifies the resultant value via <a href="#fabric/globals/resolve"><code>resolve()</code></a> or a return value.</p>
 </div>
 
@@ -1837,13 +1928,13 @@ f.pass([ -<span class="hljs-number">2</span>, -<span class="hljs-number">1</span
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function( prevVal, currVal, index, array )</span>
-													 
+													
 													<span class="descr"><p>The accumulator function.</p>
 </span>
 
@@ -1852,7 +1943,7 @@ f.pass([ -<span class="hljs-number">2</span>, -<span class="hljs-number">1</span
 														
 															<li>
 																<span class="name">prevVal</span>
-																 
+																
 																<span class="descr"><p>The value previously returned in the last invocation of the accumulator function, or initVal if supplied.</p>
 </span>
 															</li>
@@ -1861,7 +1952,7 @@ f.pass([ -<span class="hljs-number">2</span>, -<span class="hljs-number">1</span
 														
 															<li>
 																<span class="name">currVal</span>
-																 
+																
 																<span class="descr"><p>The current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -1870,7 +1961,7 @@ f.pass([ -<span class="hljs-number">2</span>, -<span class="hljs-number">1</span
 														
 															<li>
 																<span class="name">index</span>
-																 
+																
 																<span class="descr"><p>The index of the current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -1879,7 +1970,7 @@ f.pass([ -<span class="hljs-number">2</span>, -<span class="hljs-number">1</span
 														
 															<li>
 																<span class="name">array</span>
-																 
+																
 																<span class="descr"><p>The passed array <code>reduce()</code> was called upon.</p>
 </span>
 															</li>
@@ -1892,7 +1983,7 @@ f.pass([ -<span class="hljs-number">2</span>, -<span class="hljs-number">1</span
 											
 												<li>
 													<span class="name">initVal</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>Value to use as the first argument to the first call of the accumulator function.</p>
 </span>
 
@@ -1920,14 +2011,14 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.reduceRight"><span class="fn-name">fabric.reduceRight()</span>  <a href="#fabric/execution/fabric.reduceRight"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  THe function specifies the resultant value via <a href="#fabric/globals/resolve"><code>resolve()</code></a> or a return value.</p>
 </div>
 
@@ -1940,13 +2031,13 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function( prevVal, currVal, index, array )</span>
-													 
+													
 													<span class="descr"><p>The accumulator function.</p>
 </span>
 
@@ -1955,7 +2046,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">prevVal</span>
-																 
+																
 																<span class="descr"><p>The value previously returned in the last invocation of the accumulator function, or initVal if supplied.</p>
 </span>
 															</li>
@@ -1964,7 +2055,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">currVal</span>
-																 
+																
 																<span class="descr"><p>The current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -1973,7 +2064,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">index</span>
-																 
+																
 																<span class="descr"><p>The index of the current element being processed in the passed array.</p>
 </span>
 															</li>
@@ -1982,7 +2073,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">array</span>
-																 
+																
 																<span class="descr"><p>The passed array <code>reduceRight()</code> was called upon.</p>
 </span>
 															</li>
@@ -1995,7 +2086,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 											
 												<li>
 													<span class="name">initVal</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>Value to use as the first argument to the first call of the accumulator function.</p>
 </span>
 
@@ -2023,14 +2114,14 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.sort"><span class="fn-name">fabric.sort()</span>  <a href="#fabric/execution/fabric.sort"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Sort the passed array.</p>
 </div>
 
@@ -2043,13 +2134,13 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function( a, b )</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>The sorting comparison function that returns a negative value for <code>a</code> before <code>b</code>, zero for <code>a</code> the same as <code>b</code>, and a positive value for <code>a</code> after <code>b</code>.</p>
 </span>
 
@@ -2058,7 +2149,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">a</span>
-																 
+																
 																<span class="descr"><p>The first value to compare.</p>
 </span>
 															</li>
@@ -2067,7 +2158,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 														
 															<li>
 																<span class="name">b</span>
-																 
+																
 																<span class="descr"><p>The second value to compare.</p>
 </span>
 															</li>
@@ -2097,14 +2188,14 @@ f.pass([ <span class="hljs-number">4</span>, <span class="hljs-number">1</span>,
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.spread"><span class="fn-name">fabric.spread()</span>  <a href="#fabric/execution/fabric.spread"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Split the passed data into slices to spread the data equally among the threads of the fabric.  The passed processing function specifies the resultant array slice via a return value or <a href="#fabric/globals/resolve"><code>resolve()</code></a>.</p>
 </div>
 
@@ -2117,13 +2208,13 @@ f.pass([ <span class="hljs-number">4</span>, <span class="hljs-number">1</span>,
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">function( slice )</span>
-													 
+													
 													<span class="descr"><p>The processing function which is run on each slice of passed data.</p>
 </span>
 
@@ -2132,7 +2223,7 @@ f.pass([ <span class="hljs-number">4</span>, <span class="hljs-number">1</span>,
 														
 															<li>
 																<span class="name">slice</span>
-																 
+																
 																<span class="descr"><p>An array containing a slice of the passed data.</p>
 </span>
 															</li>
@@ -2170,12 +2261,12 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.stop"><span class="fn-name">fabric.stop()</span>  <a href="#fabric/execution/fabric.stop"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -2191,7 +2282,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Terminates the fabric such that all its threads no longer run.</p>
 </div>
 
@@ -2212,7 +2303,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 </code></pre>
 <button class="run run-inline-code"><span class="icon-play"></span></button>
 								
-							</div>		
+							</div>
 						</div>
 					
 
@@ -2228,9 +2319,9 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 					
 						<div class="function">
 							<div class="name" id="fabric/events/fabric.message"><span class="fn-name">fabric.message()</span>  <a href="#fabric/events/fabric.message"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Send a random thread in the fabric a message.</p>
 </div>
 
@@ -2243,13 +2334,13 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">msg</span>
-													 
+													
 													<span class="descr"><p>The message (e.g. JSON object or string) to send to the thread.</p>
 </span>
 
@@ -2264,14 +2355,14 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 
 							<div class="details">
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/events/fabric.broadcast"><span class="fn-name">fabric.broadcast()</span>  <a href="#fabric/events/fabric.broadcast"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Send all threads in the fabric a message.</p>
 </div>
 
@@ -2284,13 +2375,13 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name">msg</span>
-													 
+													
 													<span class="descr"><p>The message (e.g. JSON object or string) to send to the threads.</p>
 </span>
 
@@ -2305,12 +2396,12 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 
 							<div class="details">
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/events/fabric.on"><span class="fn-name">fabric.on()</span>  <a href="#fabric/events/fabric.on"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -2330,7 +2421,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Bind to events that are emitted by the fabric.</p>
 </div>
 
@@ -2343,13 +2434,13 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">events</a></span>
-													 
+													
 													<span class="descr"><p>A space separated list of event names.</p>
 </span>
 
@@ -2358,7 +2449,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 											
 												<li>
 													<span class="name">data</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>A plain object which is passed to the handler in the event object argument.</p>
 </span>
 
@@ -2367,7 +2458,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 											
 												<li>
 													<span class="name">function(evt)</span>
-													 
+													
 													<span class="descr"><p>The handler function that is called when one of the specified events occurs.</p>
 </span>
 
@@ -2376,7 +2467,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 														
 															<li>
 																<span class="name">evt</span>
-																 
+																
 																<span class="descr"><p>The event object.</p>
 </span>
 															</li>
@@ -2396,13 +2487,13 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">eventsMap</a></span>
-													 
+													
 													<span class="descr"><p>A map of event names to handler functions.</p>
 </span>
 
@@ -2411,7 +2502,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 											
 												<li>
 													<span class="name">data</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>A plain object which is passed to the handler in the event object argument.</p>
 </span>
 
@@ -2426,12 +2517,12 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 
 							<div class="details">
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/events/fabric.promiseOn"><span class="fn-name">fabric.promiseOn()</span>  <a href="#fabric/events/fabric.promiseOn"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -2443,7 +2534,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Get a promise that is resolved when the first of any of the specified events is triggered on the fabric.</p>
 </div>
 
@@ -2456,13 +2547,13 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">events</a></span>
-													 
+													
 													<span class="descr"><p>A space separated list of event names.</p>
 </span>
 
@@ -2477,14 +2568,14 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 
 							<div class="details">
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/events/fabric.one"><span class="fn-name">fabric.one()</span>  <a href="#fabric/events/fabric.one"><span class="icon-bookmark"></span></a></div>
+
 							
-							
-							
+
 							<div class="descr"><p>Bind to events that are emitted by the fabric, and trigger the handler only once.</p>
 </div>
 
@@ -2497,13 +2588,13 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">events</a></span>
-													 
+													
 													<span class="descr"><p>A space separated list of event names.</p>
 </span>
 
@@ -2512,7 +2603,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 											
 												<li>
 													<span class="name">data</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>A plain object which is passed to the handler in the event object argument.</p>
 </span>
 
@@ -2521,7 +2612,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 											
 												<li>
 													<span class="name">function(evt)</span>
-													 
+													
 													<span class="descr"><p>The handler function that is called when one of the specified events occurs.</p>
 </span>
 
@@ -2530,7 +2621,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 														
 															<li>
 																<span class="name">evt</span>
-																 
+																
 																<span class="descr"><p>The event object.</p>
 </span>
 															</li>
@@ -2550,13 +2641,13 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">eventsMap</a></span>
-													 
+													
 													<span class="descr"><p>A map of event names to handler functions.</p>
 </span>
 
@@ -2565,7 +2656,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 											
 												<li>
 													<span class="name">data</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>A plain object which is passed to the handler in the event object argument.</p>
 </span>
 
@@ -2580,12 +2671,12 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 
 							<div class="details">
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/events/fabric.off"><span class="fn-name">fabric.off()</span>  <a href="#fabric/events/fabric.off"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -2605,7 +2696,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Remove event handlers on the fabric.</p>
 </div>
 
@@ -2618,13 +2709,13 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">events</a></span>
-													 
+													
 													<span class="descr"><p>A space separated list of event names.</p>
 </span>
 
@@ -2633,7 +2724,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 											
 												<li>
 													<span class="name">handler</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>A reference to the handler function to remove.</p>
 </span>
 
@@ -2649,13 +2740,13 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">eventsMap</a></span>
-													 
+													
 													<span class="descr"><p>A map of event names to handler functions to remove.</p>
 </span>
 
@@ -2670,12 +2761,12 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 
 							<div class="details">
 								
-							</div>		
+							</div>
 						</div>
 					
 						<div class="function">
 							<div class="name" id="fabric/events/fabric.trigger"><span class="fn-name">fabric.trigger()</span>  <a href="#fabric/events/fabric.trigger"><span class="icon-bookmark"></span></a></div>
-							
+
 							
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -2687,7 +2778,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 								
 							</div>
 							
-							
+
 							<div class="descr"><p>Trigger one or more events on the fabric.</p>
 </div>
 
@@ -2700,13 +2791,13 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 										
 
 										
-										
+
 										<div class="descr"></div>
 										<ul class="args">
 											
 												<li>
 													<span class="name"><a href="#events">events</a></span>
-													 
+													
 													<span class="descr"><p>A space separated list of event names to trigger.</p>
 </span>
 
@@ -2715,7 +2806,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 											
 												<li>
 													<span class="name">extraParams</span>
-													<span class="optional">[optional]</span> 
+													<span class="optional">[optional]</span>
 													<span class="descr"><p>An array of additional parameters to pass to the handler.</p>
 </span>
 
@@ -2730,7 +2821,7 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 
 							<div class="details">
 								
-							</div>		
+							</div>
 						</div>
 					
 
@@ -2943,23 +3034,14 @@ f.run(<span class="hljs-function"><span class="hljs-keyword">function</span><spa
 		</div>
 
 
-		<div id="orphaned-cy-container">
-			<div id="cy-etc" class="hidden">
-				<div id="cy-arrow">
+		<div id="orphaned-runner-container">
+			<div id="runner-etc">
+				<div id="runner-arrow">
 					<span class="icon-arrow-down"></span>
 				</div>
-				<div id="cy-title"><pre class="content"></pre></div>
-				<div id="cy-label" class="hidden"><code>window.cy</code></div>
-				<div id="cy" class="hidden"></div>
-				<div id="cy-refresh" class="hidden">
-					<span class="link plain-link icon-refresh"></span>
-				</div>
-				<div id="cy-show">
-					<span class="link plain-link icon-plus"></span>
-				</div>
-				<div id="cy-hide" class="hidden">
-					<span class="link plain-link icon-minus"></span>
-				</div>
+				<div id="runner-title"><pre class="content"></pre></div>
+				<div id="runner-label">Console</div>
+				<pre id="runner-text"><code id="console">foo bar baz TODO</code></pre>
 			</div>
 		</div>
 
