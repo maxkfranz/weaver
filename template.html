@@ -4,12 +4,15 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 		<link rel="canonical" href="http://js.cytoscape.org" />
-		<meta name="description" content="Concise and readable multitasking (compatible with CommonJS/Node.js/io.js, AMD/Require.js, Bower, npm, and plain JavaScript)">
+		<meta name="description" content="Concise and readable multitasking (compatible with CommonJS/Node.js/io.js, AMD/Require.js, npm, Bower, spm, Meteor, and plain JavaScript)">
 		<meta name="author" content="Max Franz">
 		<meta name="robots" content="all" />
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimal-ui">
 
 		<title>Weaver.js</title>
+
+		<link rel="shortcut icon" href="img/favicon.ico" />
+		<link rel="shortcut icon" type="image/svg" href="img/logo.svg" />
 
 		<!-- inject:css -->
 		<link rel="stylesheet" href="css/reset.css">
@@ -17,16 +20,28 @@
 		<link rel="stylesheet" href="css/highlight/github.css">
 		<link rel="stylesheet" href="css/style.css">
 		<!-- endinject -->
-		
+
 	</head>
 
 	<body>
 
 		<div id="content">
 
+			<div id="open-navigation" class="activatable"><span class="icon-reorder"></span></div>
+			<div id="open-navigation-bg"></div>
+
 			<h1 id="top" class="title">Weaver.js</h1>
-			<div class="subtitle">Concise and readable multitasking (compatible with <a target="_blank" href="http://wiki.commonjs.org/wiki/CommonJS">CommonJS</a>/<a target="_blank" href="http://nodejs.org/">Node.js</a>/<a target="_blank" href="http://iojs.org/">io.js</a>, <a target="_blank" href="http://requirejs.org">AMD/Require.js</a>, <a target="_blank" href="http://bower.io">Bower</a>, <a target="_blank" href="http://npmjs.org">npm</a>, and plain JavaScript)</div>
-			
+			<div class="subtitle">Concise and readable multitasking
+				(compatible with
+				<a target="_blank" href="http://wiki.commonjs.org/wiki/CommonJS">CommonJS</a>/<a target="_blank" href="http://nodejs.org/">Node.js</a>/<a target="_blank" href="http://iojs.org/">io.js</a>,
+				<a target="_blank" href="http://requirejs.org">AMD/Require.js</a>,
+				<a target="_blank" href="http://npmjs.org">npm</a>,
+				<a target="_blank" href="http://bower.io">Bower</a>,
+				<a target="_blank" href="http://spmjs.io">spm</a>,
+				<a target="_blank" href="https://meteor.com">Meteor</a>,
+				and plain JavaScript)
+			</div>
+
 			<div class="buttons-subtitle">
 				<a class="button green" target="_blank" href="https://github.com/maxkfranz/weaver"><span class="icon-github-alt"></span> GitHub</a>
 
@@ -44,8 +59,8 @@
 			<div class="links likes">
 				<span class="like-label">Like Weaver.js?</span> |
 				<a target="_blank" href="https://github.com/maxkfranz/weaver"><span class="icon-star"></span> Star it on GitHub</a> |
-				<a target="_blank" href="https://twitter.com/intent/tweet?status=Weaver.js,%20concise%20and%20readable%20multitasking%20weaver.maxfranz.org"><span class="icon-twitter"></span> Share it on Twitter</a> |
-				<a target="_blank" href="https://plus.google.com/share?url=weaver.maxfranz.org"><span class="icon-google-plus"></span> Share it on Google+</a>
+				<a target="_blank" href="https://twitter.com/intent/tweet?status=Weaver.js,%20concise%20and%20readable%20multitasking%20weaver.js.org"><span class="icon-twitter"></span> Share it on Twitter</a> |
+				<a target="_blank" href="https://plus.google.com/share?url=weaver.js.org"><span class="icon-google-plus"></span> Share it on Google+</a>
 			</div>
 
 			<div id="documentation">
@@ -66,7 +81,7 @@
 
 				{{#if demo}}
 
-					<div class="gallery-full-demo">			
+					<div class="gallery-full-demo">
 						<div class="gallery-full-padder"></div>
 
 						<a class="gallery-full-link" target="_blank" href="{{demo.viewUrl}}">
@@ -74,7 +89,7 @@
 						</a>
 
 						<button class="run"><span class="icon-play"></span></button>
-						
+
 					</div>
 
 					{{#if demo.name}}
@@ -90,7 +105,7 @@
 					<div class="gallery-demos">
 					{{#each demos}}
 						<div class="gallery-demo">
-						
+
 							<a class="gallery-link" target="_blank" href="{{viewUrl}}">
 								<span class="gallery-preview" style="background-image: url('{{imgUrl}}');"></span>
 							</a>
@@ -104,7 +119,7 @@
 									<a href="{{githubUrl}}"><span class="icon-github-alt"></span></a>
 								</span>
 							</div>
-							
+
 						</div>
 					{{/each}}
 					</div>
@@ -128,11 +143,11 @@
 										<div class="gallery-title">
 											<span class="gallery-name">{{name}}</span>
 										</div>
-										
+
 										<a class="gallery-link" target="_blank" href="{{srcUrl}}">
 											<span class="gallery-preview" style="background-image: url('{{imgUrl}}');"></span>
 										</a>
-										
+
 									</div>
 								{{/each}}
 							</div>
@@ -146,7 +161,7 @@
 					{{#each fns}}
 						<div class="function">
 							<div class="name" id="{{id}}"><span class="fn-name">{{name}}()</span> {{#if aliases}}et al{{/if}} {{{bookmark}}}</div>
-							
+
 							{{#if processedPureAliases}}
 							<div class="pure-aliases">
 								<span class="important-indicator"></span> Aliases:
@@ -158,7 +173,7 @@
 								{{/each}}
 							</div>
 							{{/if}}
-							
+
 							<div class="descr">{{{descr}}}</div>
 
 							{{#if formats}}
@@ -182,13 +197,13 @@
 											{{/each}}
 										</div>
 										{{/if}}
-										
+
 										<div class="descr">{{{descr}}}</div>
 										<ul class="args">
 											{{#each args}}
 												<li>
 													<span class="name">{{{linkedName}}}</span>
-													{{#if optional}}<span class="optional">[optional]</span>{{/if}} 
+													{{#if optional}}<span class="optional">[optional]</span>{{/if}}
 													<span class="descr">{{{descr}}}</span>
 
 													{{#if fields}}
@@ -196,7 +211,7 @@
 														{{#each fields}}
 															<li>
 																<span class="name">{{{linkedName}}}</span>
-																{{#if optional}}<span class="optional">[optional]</span>{{/if}} 
+																{{#if optional}}<span class="optional">[optional]</span>{{/if}}
 																<span class="descr">{{{descr}}}</span>
 															</li>
 
@@ -205,7 +220,7 @@
 																{{#each fields}}
 																<li>
 																	<span class="name">{{{linkedName}}}</span>
-																	{{#if optional}}<span class="optional">[optional]</span>{{/if}} 
+																	{{#if optional}}<span class="optional">[optional]</span>{{/if}}
 																	<span class="descr">{{{descr}}}</span>
 																</li>
 																{{/each}}
@@ -226,7 +241,7 @@
 								{{#if html}}
 									{{{html}}}
 								{{/if}}
-							</div>		
+							</div>
 						</div>
 					{{/each}}
 
@@ -271,23 +286,14 @@
 		</div>
 
 
-		<div id="orphaned-cy-container">
-			<div id="cy-etc" class="hidden">
-				<div id="cy-arrow">
+		<div id="orphaned-runner-container">
+			<div id="runner-etc">
+				<div id="runner-arrow">
 					<span class="icon-arrow-down"></span>
 				</div>
-				<div id="cy-title"><pre class="content"></pre></div>
-				<div id="cy-label" class="hidden"><code>window.cy</code></div>
-				<div id="cy" class="hidden"></div>
-				<div id="cy-refresh" class="hidden">
-					<span class="link plain-link icon-refresh"></span>
-				</div>
-				<div id="cy-show">
-					<span class="link plain-link icon-plus"></span>
-				</div>
-				<div id="cy-hide" class="hidden">
-					<span class="link plain-link icon-minus"></span>
-				</div>
+				<div id="runner-title"><pre class="content"></pre></div>
+				<div id="runner-label">Console</div>
+				<pre id="runner-text"><code id="console">foo bar baz TODO</code></pre>
 			</div>
 		</div>
 

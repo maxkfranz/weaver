@@ -1,5 +1,5 @@
 /*!
- * This file is part of Weaver.js 1.0.0-pre.
+ * This file is part of Weaver.js snapshot-2aecd76751-1429735360408.
  * 
  * Weaver.js is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the Free
@@ -31,7 +31,7 @@ var weaver;
 
   $$.fn = {};
 
-  $$.version = '1.0.0-pre';
+  $$.version = 'snapshot-2aecd76751-1429735360408';
 
   if( typeof module !== 'undefined' && module.exports ){ // expose as a commonjs module
     module.exports = weaver;

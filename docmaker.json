@@ -129,8 +129,8 @@
               "formats": [
                 {
                   "args": [
-                    { 
-                      "name": "function( prevVal, currVal, index, array )", 
+                    {
+                      "name": "function( prevVal, currVal, index, array )",
                       "descr": "The accumulator function.",
                       "fields": [
                         { "name": "prevVal", "descr": "The value previously returned in the last invocation of the accumulator function, or initVal if supplied." },
@@ -151,8 +151,8 @@
               "formats": [
                 {
                   "args": [
-                    { 
-                      "name": "function( prevVal, currVal, index, array )", 
+                    {
+                      "name": "function( prevVal, currVal, index, array )",
                       "descr": "The accumulator function.",
                       "fields": [
                         { "name": "prevVal", "descr": "The value previously returned in the last invocation of the accumulator function, or initVal if supplied." },
@@ -216,7 +216,8 @@
                     { "name": "data", "descr": "A plain object which is passed to the handler in the event object argument.", "optional": true }
                   ]
                 }
-              ]
+              ],
+              "md": "thread/on"
             },
 
             {
@@ -251,7 +252,8 @@
                     { "name": "data", "descr": "A plain object which is passed to the handler in the event object argument.", "optional": true }
                   ]
                 }
-              ]
+              ],
+              "md": "thread/one"
             },
 
             {
@@ -271,7 +273,8 @@
                     { "name": "eventsMap", "descr": "A map of event names to handler functions to remove." }
                   ]
                 }
-              ]
+              ],
+              "md": "thread/off"
             },
 
             {
@@ -285,9 +288,10 @@
                     { "name": "extraParams", "descr": "An array of additional parameters to pass to the handler.", "optional": true }
                   ]
                 }
-              ]
+              ],
+              "md": "thread/trigger"
             }
-          
+
           ]
         }
       ]
@@ -387,8 +391,8 @@
               "formats": [
                 {
                   "args": [
-                    { 
-                      "name": "function( prevVal, currVal, index, array )", 
+                    {
+                      "name": "function( prevVal, currVal, index, array )",
                       "descr": "The accumulator function.",
                       "fields": [
                         { "name": "prevVal", "descr": "The value previously returned in the last invocation of the accumulator function, or initVal if supplied." },
@@ -410,8 +414,8 @@
               "formats": [
                 {
                   "args": [
-                    { 
-                      "name": "function( prevVal, currVal, index, array )", 
+                    {
+                      "name": "function( prevVal, currVal, index, array )",
                       "descr": "The accumulator function.",
                       "fields": [
                         { "name": "prevVal", "descr": "The value previously returned in the last invocation of the accumulator function, or initVal if supplied." },
@@ -433,8 +437,8 @@
               "formats": [
                 {
                   "args": [
-                    { 
-                      "name": "function( a, b )", 
+                    {
+                      "name": "function( a, b )",
                       "descr": "The sorting comparison function that returns a negative value for `a` before `b`, zero for `a` the same as `b`, and a positive value for `a` after `b`.",
                       "fields": [
                         { "name": "a", "descr": "The first value to compare." },
@@ -454,8 +458,8 @@
               "formats": [
                 {
                   "args": [
-                    { 
-                      "name": "function( slice )", 
+                    {
+                      "name": "function( slice )",
                       "descr": "The processing function which is run on each slice of passed data.",
                       "fields": [
                         { "name": "slice", "descr": "An array containing a slice of the passed data." }
@@ -596,7 +600,7 @@
                 }
               ]
             }
-          
+
           ]
         }
       ]

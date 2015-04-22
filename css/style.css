@@ -22,21 +22,18 @@ img {
 	max-width: 80%;
 }
 
-#orphaned-cy-container {
+#orphaned-runner-container {
 	position: absolute;
 	left: -99999px;
 	top: -99999px;
 }
 
-#cy-etc {
+#runner-etc {
 	position: relative;
 	margin: 1em;
 	z-index: 999;
-	height: 15em;
-	width: 15em;
+	height: auto;
 	margin-top: 2.5em;
-	border: 1px solid rgba(127, 127, 127, 0.5);
-	background: rgba(255, 255, 255, 0.66);
 }
 
 #cy {
@@ -48,7 +45,7 @@ img {
 	width: 100%;
 }
 
-#cy-title {
+#runner-title {
 	position: absolute;
 	left: 0;
 	bottom: 100%;
@@ -62,11 +59,11 @@ img {
 	display: none;
 }
 
-#cy-title pre {
+#runner-title pre {
 	font-size: 0.8em;
 }
 
-#cy-arrow {
+#runner-arrow {
 	position: absolute;
 	left: 0;
 	width: 100%;
@@ -79,7 +76,7 @@ img {
 	pointer-events: none;
 }
 
-#cy-label {
+#runner-label {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -89,15 +86,15 @@ img {
 	z-index: 1000;
 }
 
-#cy-label code {
+#runner-label code {
 	font-size: 0.8em;
 }
 
-#cy-title .content {
+#runner-title .content {
 	width: 9999px;
 }
 
-#cy-title pre {
+#runner-title pre {
 	border: 0;
 	background: transparent;
 }
@@ -147,6 +144,11 @@ button:active {
 	box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
+.activatable:active {
+	box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.5);
+	border-radius: 0.25em;
+}
+
 .run {
 	margin: 0 2em;
 	margin-top: -2.25em;
@@ -193,7 +195,9 @@ button:active {
 	overflow-y: auto;
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
-	white-space: nowrap
+	white-space: nowrap;
+	background: #fff;
+	z-index: 999999;
 }
 
 #navigation .toc {
@@ -290,7 +294,7 @@ button:active {
 }
 
 .gallery-name {
-	
+
 }
 
 .gallery-embed,
@@ -375,11 +379,11 @@ button:active {
     right: 0;
 	width: 10em;
 	height: 10em;
-	/*background-image: url('../img/cytoscape-logo.svg');*/
+	background-image: url('../img/logo.svg');
 	background-size: 100% 100%;
 	background-position: top left;
 	background-repeat: no-repeat;
-	opacity: 0.04;
+	opacity: 0.07;
 	z-index: -1;
 }
 
@@ -470,7 +474,7 @@ button:active {
 #demo-code-area.hidden #demo-code {
 	display: none;
 }
- 
+
 .title {
 	font-weight: 200;
 	font-size: 4em;
@@ -635,7 +639,7 @@ pre code {
 }
 
 .function pre {
-	
+
 }
 
 .function {
@@ -646,7 +650,7 @@ pre code {
 }
 
 .function + .function {
-	
+
 }
 
 .function .name {
@@ -719,19 +723,29 @@ pre code {
 }
 
 .args .optional {
-	
+
 }
 
 .args .fields .name {
-	
+
 }
 
 .build-list {
 	margin: 0.25em;
 }
 
+#open-navigation {
+	display: none;
+	position: fixed;
+	right: 0;
+	top: 0;
+	margin: 1em 0.75em;
+	padding: 0 0.25em;
+	cursor: pointer;
+}
 
-@media only screen 
+
+@media only screen
 and (max-width : 800px) {
 
 	body {
@@ -755,9 +769,13 @@ and (max-width : 800px) {
 		margin-left: 0.5em;
 	}
 
+	#open-navigation {
+		display: block;
+	}
+
 }
 
-@media only screen 
+@media only screen
 and (max-width : 800px)
 and (orientation:landscape) {
 
@@ -769,9 +787,13 @@ and (orientation:landscape) {
 		margin-left: 16em;
 	}
 
+	#open-navigation {
+		display: none;
+	}
+
 }
 
-@media only screen 
+@media only screen
 and (max-width : 800px)
 and (orientation:portrait) {
 
@@ -779,4 +801,20 @@ and (orientation:portrait) {
 
 	}
 
+}
+
+#open-navigation-bg {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 9999;
+	display: none;
+}
+
+.navigation-open #open-navigation-bg,
+.navigation-open #navigation {
+	display: block;
 }

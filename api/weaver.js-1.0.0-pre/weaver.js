@@ -1362,7 +1362,7 @@ var weaver;
     },
 
     // run on random thread
-    run: function( fn ){ 
+    run: function( fn ){
       var pass = this._private.pass.shift();
 
       return this.random().pass( pass ).run( fn );
@@ -1392,7 +1392,7 @@ var weaver;
         thread.stop();
       }
 
-      return this.trigger('stop'); // chaining
+      return this; // chaining
     },
 
     // pass data to be used with .spread() etc.
@@ -1473,7 +1473,7 @@ var weaver;
           var oldLen = mapped.length;
           var ret = _$_$_fabmap( split[i] );
           var nothingInsdByResolve = oldLen === mapped.length;
-          
+
           if( nothingInsdByResolve ){
             mapped.push( ret );
           }
@@ -1519,8 +1519,8 @@ var weaver;
           return -1;
         } else if( a > b ){
           return 1;
-        } 
-        
+        }
+
         return 0;
       };
 
@@ -1528,7 +1528,7 @@ var weaver;
 
       return self.spread(function( split ){ // sort each split normally
         var sortedSplit = split.sort( _$_$_cmp );
-        resolve( sortedSplit ); 
+        resolve( sortedSplit );
 
       }).then(function( joined ){
         // do all the merging in the main thread to minimise data transfer
@@ -1545,7 +1545,7 @@ var weaver;
           var l = i;
           var r = j;
 
-          var sorted = []; 
+          var sorted = [];
 
           for( var k = l; k < max; k++ ){
 
@@ -1584,7 +1584,7 @@ var weaver;
 
 
   });
-  
+
   var defineRandomPasser = function( opts ){
     opts = opts || {};
 
@@ -1599,7 +1599,7 @@ var weaver;
     randomMap: defineRandomPasser({ threadFn: 'map' }),
 
     reduce: defineRandomPasser({ threadFn: 'reduce' }),
-    
+
     reduceRight: defineRandomPasser({ threadFn: 'reduceRight' })
   });
 
@@ -1612,10 +1612,10 @@ var weaver;
   $$.fn.fabric({
     on: $$.define.on(),
     one: $$.define.on({ unbindSelfOnTrigger: true }),
-    off: $$.define.off(), 
+    off: $$.define.off(),
     trigger: $$.define.trigger()
   });
 
   $$.define.eventAliasesOn( $$.fabfn );
-  
+
 })( weaver, typeof window === 'undefined' ? null : window );
