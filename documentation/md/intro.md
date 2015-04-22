@@ -30,3 +30,5 @@ Weaver.js is an open-source multitasking library written in JavaScript.  You can
 Weaver.js is an open-source project, and anyone is free to contribute.  For more information, refer to the [GitHub README](https://github.com/maxkfranz/weaver).
 
 Weaver.js was designed and developed by [Max Franz](http://maxfranz.org).
+
+The .js.org domain for Weaver is provided gratis by [JS.ORG](http://js.org).
