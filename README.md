@@ -1,5 +1,7 @@
-# Weaver.js  [![JS.ORG](https://img.shields.io/badge/js.org-weaver-ffb400.svg?style=flat-square)](http://js.org)
+# Weaver.js
 
+[![JS.ORG](https://img.shields.io/badge/js.org-weaver-ffb400.svg?style=flat-square)](http://js.org)
+[![Build Status](https://travis-ci.org/maxkfranz/weaver.svg?branch=master)](https://travis-ci.org/maxkfranz/weaver)
 
 
 
@@ -91,5 +93,3 @@ Run `gulp` in the console.  The main targets are:
 ## Tests
 
 Mocha tests are found in the [test directory](https://github.com/cytoscape/weaver.js/tree/master/test).  The tests can be run in the browser or they can be run via Node.js (`gulp test`).
-
-
