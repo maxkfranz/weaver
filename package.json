@@ -58,5 +58,5 @@
   },
   "scripts": {
     "test": "./node_modules/gulp/bin/gulp.js test"
-  },
+  }
 }
