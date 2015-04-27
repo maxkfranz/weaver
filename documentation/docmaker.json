@@ -126,7 +126,7 @@
 
             {
               "name": "thread.reduce",
-              "descr": "Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  THe function specifies the resultant value via [`resolve()`](#thread/globals/resolve) or a return value.",
+              "descr": "Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  The function specifies the resultant value via [`resolve()`](#thread/globals/resolve) or a return value.",
               "formats": [
                 {
                   "args": [
@@ -148,7 +148,7 @@
 
             {
               "name": "thread.reduceRight",
-              "descr": "Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  THe function specifies the resultant value via [`resolve()`](#thread/globals/resolve) or a return value.",
+              "descr": "Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  The function specifies the resultant value via [`resolve()`](#thread/globals/resolve) or a return value.",
               "formats": [
                 {
                   "args": [
@@ -389,7 +389,7 @@
 
             {
               "name": "fabric.reduce",
-              "descr": "Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  THe function specifies the resultant value via [`resolve()`](#fabric/globals/resolve) or a return value.",
+              "descr": "Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  The function specifies the resultant value via [`resolve()`](#fabric/globals/resolve) or a return value.",
               "formats": [
                 {
                   "args": [
@@ -412,7 +412,7 @@
 
             {
               "name": "fabric.reduceRight",
-              "descr": "Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  THe function specifies the resultant value via [`resolve()`](#fabric/globals/resolve) or a return value.",
+              "descr": "Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  The function specifies the resultant value via [`resolve()`](#fabric/globals/resolve) or a return value.",
               "formats": [
                 {
                   "args": [
@@ -435,7 +435,7 @@
 
             {
               "name": "fabric.sort",
-              "descr": "Sort the passed array.",
+              "descr": "Sort the passed array, using a divide and conquer strategy with the threads.",
               "formats": [
                 {
                   "args": [
