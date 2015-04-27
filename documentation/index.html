@@ -90,7 +90,7 @@
 <li>Abstracted and unified touch events on top of a familiar event model</li>
 <li>Allows passing data to threads and fabrics</li>
 <li>Allows requiring external functions</li>
-<li>Uses promises to make managing your asynchronous workflows easier (and includes a small polyfil for promiseless browsers)</li>
+<li>Uses promises to make managing your asynchronous workflows easier (and includes a small, internal polyfil for promiseless browsers)</li>
 <li>Includes multitasking versions of popular array functions</li>
 <li>Chainable for convenience</li>
 <li>Well maintained, with only a sliver of active bug time (i.e. minimised time to bugfix)</li>
@@ -397,6 +397,16 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 						<div class="function">
 							<div class="name" id="thread/execution/thread.require"><span class="fn-name">thread.require()</span>  <a href="#thread/execution/thread.require"><span class="icon-bookmark"></span></a></div>
 
+							
+							<div class="pure-aliases">
+								<span class="important-indicator"></span> Aliases:
+
+								
+									<span class="pure-alias">
+										<code id="thread/execution/thread.include" class="pure-alias-name">thread.include()</code><span class="pure-alias-comma">,</span>
+									</span>
+								
+							</div>
 							
 
 							<div class="descr"><p>Require a named function into the thread, giving the thread a global reference to the function.  Plain objects or simple objects with a prototype (that can be inpected and serialised live) are also supported.  Specifying the name of a JS file (i.e. a string ending in &#39;.js&#39;) allows for importing external files into the global thread scope.</p>
@@ -1532,6 +1542,16 @@ t.trigger(<span class="hljs-string">'foo'</span>);
 						<div class="function">
 							<div class="name" id="fabric/execution/fabric.require"><span class="fn-name">fabric.require()</span>  <a href="#fabric/execution/fabric.require"><span class="icon-bookmark"></span></a></div>
 
+							
+							<div class="pure-aliases">
+								<span class="important-indicator"></span> Aliases:
+
+								
+									<span class="pure-alias">
+										<code id="fabric/execution/fabric.include" class="pure-alias-name">fabric.include()</code><span class="pure-alias-comma">,</span>
+									</span>
+								
+							</div>
 							
 
 							<div class="descr"><p>Require a named function into each thread in the fabric, giving a global reference to the function.  Plain objects or simple objects with a prototype (that can be inpected and serialised live) are also supported.  Specifying the name of a JS file (i.e. a string ending in &#39;.js&#39;) allows for importing external files into the global thread scope.</p>

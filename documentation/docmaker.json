@@ -67,6 +67,7 @@
           "fns": [
             {
               "name": "thread.require",
+              "pureAliases": ["thread.include"],
               "descr": "Require a named function into the thread, giving the thread a global reference to the function.  Plain objects or simple objects with a prototype (that can be inpected and serialised live) are also supported.  Specifying the name of a JS file (i.e. a string ending in '.js') allows for importing external files into the global thread scope.",
               "formats": [
                 {
@@ -306,6 +307,7 @@
           "fns": [
             {
               "name": "fabric.require",
+              "pureAliases": ["fabric.include"],
               "descr": "Require a named function into each thread in the fabric, giving a global reference to the function.  Plain objects or simple objects with a prototype (that can be inpected and serialised live) are also supported.  Specifying the name of a JS file (i.e. a string ending in '.js') allows for importing external files into the global thread scope.",
               "formats": [
                 {
