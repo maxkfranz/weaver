@@ -697,7 +697,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 
 							
 
-							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  THe function specifies the resultant value via <a href="#thread/globals/resolve"><code>resolve()</code></a> or a return value.</p>
+							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  The function specifies the resultant value via <a href="#thread/globals/resolve"><code>resolve()</code></a> or a return value.</p>
 </div>
 
 							
@@ -787,7 +787,7 @@ t.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 
 							
 
-							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  THe function specifies the resultant value via <a href="#thread/globals/resolve"><code>resolve()</code></a> or a return value.</p>
+							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  The function specifies the resultant value via <a href="#thread/globals/resolve"><code>resolve()</code></a> or a return value.</p>
 </div>
 
 							
@@ -1523,7 +1523,8 @@ t.trigger(<span class="hljs-string">'foo'</span>);
 <button class="run run-inline-code"><span class="icon-play"></span></button><p>The <code>new</code> keyword and class-style uppercase naming are optional, so you may alternatively do as follows:</p>
 <pre><code class="lang-js"><span class="hljs-keyword">var</span> fabric = <span class="hljs-keyword">new</span> weaver.Fabric();
 </code></pre>
-<button class="run run-inline-code"><span class="icon-play"></span></button>
+<button class="run run-inline-code"><span class="icon-play"></span></button><p>For most usecases, a developer would use a fabric rather than individual threads.  By default, a fabric parallelises its tasks among its threads, making your code faster.  A task that is not suitable to parallelism in this manner (like <code>.reduce()</code>) is run in a single thread of the fabric, with the fabric acting as a queue.  Because multiple tasks can be run across the threads using this queuing mechanism, your code can still experience speedup.</p>
+
 				
 
 				
@@ -1937,7 +1938,7 @@ f.pass([ -<span class="hljs-number">2</span>, -<span class="hljs-number">1</span
 
 							
 
-							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  THe function specifies the resultant value via <a href="#fabric/globals/resolve"><code>resolve()</code></a> or a return value.</p>
+							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  The function specifies the resultant value via <a href="#fabric/globals/resolve"><code>resolve()</code></a> or a return value.</p>
 </div>
 
 							
@@ -2040,7 +2041,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 
 							
 
-							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  THe function specifies the resultant value via <a href="#fabric/globals/resolve"><code>resolve()</code></a> or a return value.</p>
+							<div class="descr"><p>Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  The function specifies the resultant value via <a href="#fabric/globals/resolve"><code>resolve()</code></a> or a return value.</p>
 </div>
 
 							
@@ -2143,7 +2144,7 @@ f.pass([ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,
 
 							
 
-							<div class="descr"><p>Sort the passed array.</p>
+							<div class="descr"><p>Sort the passed array, using a divide and conquer strategy with the threads.</p>
 </div>
 
 							
