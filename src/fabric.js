@@ -305,6 +305,7 @@
   var fn = $$.fabfn;
   fn.promise = fn.run;
   fn.terminate = fn.halt = fn.stop;
+  fn.include = fn.require;
 
   // pull in event apis
   $$.fn.fabric({

@@ -2,7 +2,6 @@ var expect = require('chai').expect;
 var weaver = require('../build/weaver.js', weaver);
 var $$ = weaver;
 
-
 describe('Thread', function(){
 
   it('resolves with a simple value', function( next ){
@@ -192,6 +191,36 @@ describe('Thread', function(){
 
     t.run(function(){
       resolve( bar() );
+    }).then(function( ret ){
+      expect( ret ).to.equal('bar');
+
+      t.stop();
+      next();
+    });
+  });
+  
+  it('requires an external file', function( next ){
+    var t = $$.Thread();
+    
+    t.require('./requires/foo.js');
+
+    t.run(function(){
+      resolve( foo() );
+    }).then(function( ret ){
+      expect( ret ).to.equal('bar');
+
+      t.stop();
+      next();
+    });
+  });
+  
+  it('requires an external file with ../', function( next ){
+    var t = $$.Thread();
+    
+    t.require('../test/requires/foo.js');
+
+    t.run(function(){
+      resolve( foo() );
     }).then(function( ret ){
       expect( ret ).to.equal('bar');
 
