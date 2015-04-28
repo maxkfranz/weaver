@@ -4,8 +4,8 @@ Events passed to handler callbacks are similar to [jQuery event objects](http://
 
 Fields:
 
- * `type` : the event type string (e.g. `"stop"`)
- * `namespace` : the event namespace string (e.g. `"foo"` for `"foo.tap"`)
+ * `type` : the event type string (e.g. `'stop'`)
+ * `namespace` : the event namespace string (e.g. `'foo'` for `'foo.tap'`)
  * `data` : additional data object passed by `.trigger()`
  * `timeStamp` : Unix epoch time of event
 
