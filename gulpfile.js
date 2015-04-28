@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var path = require('path');
 var tap = require('gulp-tap');
-var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var replace = require('gulp-replace');
@@ -19,6 +18,9 @@ var exec = require('child_process').exec;
 var runSequence = require('run-sequence');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream'); // converts node streams into vinyl streams
+var del = require('del');
+var vinylPaths = require('vinyl-paths');
+var clean = function(){ return vinylPaths(del) };
 
 var version; // used for marking builds w/ version etc
 
