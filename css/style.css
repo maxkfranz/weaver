@@ -198,6 +198,9 @@ button:active {
 	white-space: nowrap;
 	background: #fff;
 	z-index: 999999;
+	opacity: 1;
+	
+	transition: opacity ease-out 150ms;
 }
 
 #navigation .toc {
@@ -534,7 +537,8 @@ h2 {
 	font-weight: 600;
 }
 
-h2 a {
+h2 a,
+.function > .name > a {
 	font-size: 0.8em;
 }
 
@@ -762,7 +766,8 @@ and (max-width : 800px) {
 	}
 
 	#navigation {
-		display: none;
+		opacity: 0;
+		pointer-events: none;
 	}
 
 	#content {
@@ -780,7 +785,8 @@ and (max-width : 800px)
 and (orientation:landscape) {
 
 	#navigation {
-		display: block;
+		opacity: 1;
+		pointer-events: auto;
 	}
 
 	#content {
@@ -811,10 +817,14 @@ and (orientation:portrait) {
 	bottom: 0;
 	background: rgba(0, 0, 0, 0.5);
 	z-index: 9999;
-	display: none;
+	opacity: 0;
+	pointer-events: none;
+	
+	transition: opacity ease-out 150ms;
 }
 
 .navigation-open #open-navigation-bg,
 .navigation-open #navigation {
-	display: block;
+	opacity: 1;
+	pointer-events: auto;
 }

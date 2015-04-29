@@ -2,7 +2,7 @@
 $(function(){
 
   // fix for webkit
-  $('#navigation').on('wheel mousewheel DOMMouseScroll MozMousePixelScroll', function(e){
+  $('#navigation').on('wheel mousewheel DOMMouseScroll MozMousePixelScroll scroll', function(e){
     e.stopPropagation();
   });
 

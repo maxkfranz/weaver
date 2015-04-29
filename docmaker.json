@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-pre",
+  "version": "1.0.0",
 
   "fnArgLinks": {
     "event": "#events",
@@ -67,11 +67,12 @@
           "fns": [
             {
               "name": "thread.require",
-              "descr": "Require a named function into the thread, giving the thread a global reference to the function.  Plain objects or simple objects with a prototype (that can be inpected and serialised live) are also supported.",
+              "pureAliases": ["thread.include"],
+              "descr": "Require a named function into the thread, giving the thread a global reference to the function.  Plain objects or simple objects with a prototype (that can be inpected and serialised live) are also supported.  Specifying the name of a JS file (i.e. a string ending in '.js') allows for importing external files into the global thread scope.",
               "formats": [
                 {
                   "args": [
-                    { "name": "obj", "descr": "The named function or simple object to require that is serialised and copied to the thread." },
+                    { "name": "obj", "descr": "The named function, simple object, or JS file name to require that is serialised and copied to the thread." },
                     { "name": "as", "descr": "The name of the object as available in the thread.  This is mandatory for an object that is not a named function, because its name can not be automatically inferred.", "optional": true }
                   ]
                 }
@@ -125,7 +126,7 @@
 
             {
               "name": "thread.reduce",
-              "descr": "Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  THe function specifies the resultant value via [`resolve()`](#thread/globals/resolve) or a return value.",
+              "descr": "Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  The function specifies the resultant value via [`resolve()`](#thread/globals/resolve) or a return value.",
               "formats": [
                 {
                   "args": [
@@ -147,7 +148,7 @@
 
             {
               "name": "thread.reduceRight",
-              "descr": "Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  THe function specifies the resultant value via [`resolve()`](#thread/globals/resolve) or a return value.",
+              "descr": "Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  The function specifies the resultant value via [`resolve()`](#thread/globals/resolve) or a return value.",
               "formats": [
                 {
                   "args": [
@@ -306,11 +307,12 @@
           "fns": [
             {
               "name": "fabric.require",
-              "descr": "Require a named function into each thread in the fabric, giving a global reference to the function.  Plain objects or simple objects with a prototype (that can be inpected and serialised live) are also supported.",
+              "pureAliases": ["fabric.include"],
+              "descr": "Require a named function into each thread in the fabric, giving a global reference to the function.  Plain objects or simple objects with a prototype (that can be inpected and serialised live) are also supported.  Specifying the name of a JS file (i.e. a string ending in '.js') allows for importing external files into the global thread scope.",
               "formats": [
                 {
                   "args": [
-                    { "name": "obj", "descr": "The named function or simple object to require that is serialised and copied to the fabric." },
+                    { "name": "obj", "descr": "The named function, simple object, or JS file name to require that is serialised and copied to the fabric." },
                     { "name": "as", "descr": "The name of the object as available in the fabric.  This is mandatory for an object that is not a named function, because its name can not be automatically inferred.", "optional": true }
                   ]
                 }
@@ -387,7 +389,7 @@
 
             {
               "name": "fabric.reduce",
-              "descr": "Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  THe function specifies the resultant value via [`resolve()`](#fabric/globals/resolve) or a return value.",
+              "descr": "Apply a function against an accumulator and each value of the passed array (from left-to-right) has to reduce it to a single value.  The function specifies the resultant value via [`resolve()`](#fabric/globals/resolve) or a return value.",
               "formats": [
                 {
                   "args": [
@@ -410,7 +412,7 @@
 
             {
               "name": "fabric.reduceRight",
-              "descr": "Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  THe function specifies the resultant value via [`resolve()`](#fabric/globals/resolve) or a return value.",
+              "descr": "Apply a function against an accumulator and each value of the passed array (from right-to-left) has to reduce it to a single value.  The function specifies the resultant value via [`resolve()`](#fabric/globals/resolve) or a return value.",
               "formats": [
                 {
                   "args": [
@@ -433,7 +435,7 @@
 
             {
               "name": "fabric.sort",
-              "descr": "Sort the passed array.",
+              "descr": "Sort the passed array, using a divide and conquer strategy with the threads.",
               "formats": [
                 {
                   "args": [

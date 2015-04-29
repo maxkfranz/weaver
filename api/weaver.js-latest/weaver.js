@@ -1,5 +1,5 @@
 /*!
- * This file is part of Weaver.js 1.0.0-pre.
+ * This file is part of Weaver.js 1.0.0.
  * 
  * Weaver.js is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the Free
@@ -31,7 +31,7 @@ var weaver;
 
   $$.fn = {};
 
-  $$.version = '1.0.0-pre';
+  $$.version = '1.0.0';
 
   if( typeof module !== 'undefined' && module.exports ){ // expose as a commonjs module
     module.exports = weaver;
@@ -917,8 +917,9 @@ var weaver;
       return new $$.Thread( fn );
     }
 
-    var _p = this._private = {
+    this._private = {
       requires: [],
+      files: [],
       queue: null,
       pass: []
     };
@@ -975,7 +976,7 @@ var weaver;
     var protoreq = function( val, subname ){
       if( val.prototype ){
         var protoNonempty = false;
-        for( var prop in val.prototype ){ protoNonempty = true; break; };
+        for( var prop in val.prototype ){ protoNonempty = true; break; }
 
         if( protoNonempty ){
           req += fnAsRequire( {
@@ -1029,10 +1030,20 @@ var weaver;
 
     return req;
   };
+  
+  var isPathStr = function( str ){
+    return $$.is.string(str) && str.match(/\.js$/);
+  };
 
   $$.fn.thread({
 
     require: function( fn, as ){
+      if( isPathStr(fn) ){
+        this._private.files.push( fn );
+        
+        return this;
+      }
+        
       if( as ){
         if( $$.is.fn(fn) ){
           // disabled b/c doesn't work with forced names on functions w/ prototypes
@@ -1072,6 +1083,9 @@ var weaver;
           return self.run( fn, pass );
         });
       }
+      
+      var useWW = window != null;
+      var useNode = typeof module !== 'undefined';
 
       self.trigger('run');
 
@@ -1086,6 +1100,21 @@ var weaver;
         // worker code to exec
         var fnStr = '\n' + ( _p.requires.map(function( r ){
           return fnAsRequire( r );
+        }) ).concat( _p.files.map(function( f ){
+          if( useWW ){
+            var wwifyFile = function( file ){
+              if( file.match(/^\.\//) || file.match(/^\.\./) ){
+                return window.location.origin + window.location.pathname + file;
+              } else if( file.match(/^\//) ){
+                return window.location.origin + '/' + file;
+              }
+              return file;
+            };
+            
+            return 'importScripts("' + wwifyFile(f) + '");';
+          } else if( useNode ) {
+            return 'eval( require("fs").readFileSync("' + f + '", { encoding: "utf8" }) );';
+          }
         }) ).concat([
           '( function(){',
             'var ret = (' + fnImplStr + ')(' + JSON.stringify(pass) + ');',
@@ -1095,8 +1124,9 @@ var weaver;
 
         // because we've now consumed the requires, empty the list so we don't dupe on next run()
         _p.requires = [];
+        _p.files = [];
 
-        if( window ){
+        if( useWW ){
           var fnBlob, fnUrl;
 
           // add normalised thread api functions
@@ -1138,11 +1168,13 @@ var weaver;
           // worker messages => events
           var cb;
           ww.addEventListener('message', cb = function( m ){
-            if( $$.is.object(m) && $$.is.object( m.data ) && ('$$resolve' in m.data) ){
+            var isObject = $$.is.object(m) && $$.is.object( m.data );
+            
+            if( isObject && ('$$resolve' in m.data) ){
               ww.removeEventListener('message', cb); // done listening b/c resolve()
 
               resolve( m.data.$$resolve );
-            } else if( $$.is.object(m) && $$.is.object( m.data ) && ('$$reject' in m.data) ){
+            } else if( isObject && ('$$reject' in m.data) ){
               ww.removeEventListener('message', cb); // done listening b/c reject()
 
               reject( m.data.$$reject );
@@ -1155,7 +1187,7 @@ var weaver;
             ww.postMessage('$$start'); // start up the worker
           }
 
-        } else if( typeof module !== 'undefined' ){
+        } else if( useNode ){
           // create a new process
           var path = require('path');
           var child_process = require('child_process');
@@ -1284,6 +1316,7 @@ var weaver;
   var fn = $$.thdfn;
   fn.promise = fn.run;
   fn.terminate = fn.halt = fn.stop;
+  fn.include = fn.require;
 
   // higher level alias (in case you like the worker metaphor)
   $$.worker = $$.Worker = $$.Thread;
@@ -1307,7 +1340,7 @@ var weaver;
       return new $$.Fabric( N );
     }
 
-    var _p = this._private = {
+    this._private = {
       pass: []
     };
 
@@ -1437,7 +1470,7 @@ var weaver;
       }
 
       return $$.Promise.all( runPs ).then(function( thens ){
-        var postpass = new Array();
+        var postpass = [];
         var p = 0;
 
         // fill postpass with the total result joined from all threads
@@ -1512,7 +1545,6 @@ var weaver;
       var self = this;
       var P = this._private.pass[0].length;
       var subsize = this.spreadSize();
-      var N = this.length;
 
       cmp = cmp || function( a, b ){ // default comparison function
         if( a < b ){
@@ -1607,6 +1639,7 @@ var weaver;
   var fn = $$.fabfn;
   fn.promise = fn.run;
   fn.terminate = fn.halt = fn.stop;
+  fn.include = fn.require;
 
   // pull in event apis
   $$.fn.fabric({

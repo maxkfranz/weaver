@@ -9,3 +9,5 @@ The `new` keyword and class-style uppercase naming are optional, so you may alte
 ```js
 var fabric = new weaver.Fabric();
 ```
+
+For most usecases, a developer would use a fabric rather than individual threads.  By default, a fabric parallelises its tasks among its threads, making your code faster.  A task that is not suitable to parallelism in this manner (like `.reduce()`) is run in a single thread of the fabric, with the fabric acting as a queue.  Because multiple tasks can be run across the threads using this queuing mechanism, your code can still experience speedup.

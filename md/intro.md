@@ -16,7 +16,7 @@
  * Abstracted and unified touch events on top of a familiar event model
  * Allows passing data to threads and fabrics
  * Allows requiring external functions
- * Uses promises to make managing your asynchronous workflows easier (and includes a small polyfil for promiseless browsers)
+ * Uses promises to make managing your asynchronous workflows easier (and includes a small, internal polyfil for promiseless browsers)
  * Includes multitasking versions of popular array functions
  * Chainable for convenience
  * Well maintained, with only a sliver of active bug time (i.e. minimised time to bugfix)
