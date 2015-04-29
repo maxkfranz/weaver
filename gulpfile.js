@@ -65,7 +65,7 @@ var paths = {
 var replaceShellVars = function( cmds ){
   return cmds.map(function( cmd ){
     return cmd
-      .replace(/\$VERSION/g, version)
+      //.replace(/\$VERSION/g, version)
       .replace(/\$GIT/, 'git')
       .replace(/\$CD/, 'cd')
       .replace(/\$RM/, 'rm -rf')
