@@ -382,7 +382,7 @@ gulp.task('pubprep', function(next){
 
 gulp.task('pubpush', ['version'], shell.task( replaceShellVars([
   '$GIT add -A',
-  '$GIT commit -m " preparing to publish $VERSION "',
+  '$GIT commit -m "preparing to publish"',
   '$GIT push'
 ]) ));
 
