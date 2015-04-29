@@ -405,7 +405,7 @@ gulp.task('publish', ['pubprep'], function(next){
   runSequence('pubpush', 'tag', 'docspush', 'npm', 'spm', 'meteor', next);
 });
 
-gulp.task('tag', shell.task( replaceShellVars([
+gulp.task('tag', ['version'], shell.task( replaceShellVars([
   '$GIT tag -a v$VERSION -m "v$VERSION"',
   '$GIT push origin v$VERSION'
 ]) ));
