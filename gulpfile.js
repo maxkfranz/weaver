@@ -402,7 +402,7 @@ gulp.task('pubpush', ['version'], shell.task( replaceShellVars([
 ]) ));
 
 gulp.task('publish', ['pubprep'], function(next){
-  runSequence('pubpush', 'tag', 'docspush', 'npm', 'spm', 'meteor', next);
+  runSequence('pubpush', 'tag', 'docspush'/*, 'npm', 'spm', 'meteor'*/, next);
 });
 
 gulp.task('tag', ['version'], shell.task( replaceShellVars([
