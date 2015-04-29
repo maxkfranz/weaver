@@ -8,9 +8,9 @@
   * CommonJS/Node.js
   * AMD/Require.js
   * npm
-  * bower
+  * Bower
   * spm
-  * meteor/atmosphere
+  * Meteor/Atmosphere
  * Has a full suite of unit tests that can be run in the browser or the terminal
  * Documentation includes live code examples, doubling as an interactive requirements specification
  * Abstracted and unified touch events on top of a familiar event model
@@ -32,3 +32,12 @@ Weaver.js is an open-source project, and anyone is free to contribute.  For more
 Weaver.js was designed and developed by [Max Franz](http://maxfranz.org).
 
 The .js.org domain for Weaver is provided gratis by [JS.ORG](http://js.org).
+
+
+
+## Packages
+
+* npm : `npm install weaverjs`
+* Bower : `bower install weaverjs`
+* spm : `spm install weaverjs`
+* Meteor/Atmosphere : `meteor add maxkfranz:weaver`
