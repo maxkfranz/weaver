@@ -65,17 +65,17 @@ var paths = {
 var replaceShellVars = function( cmds ){
   return cmds.map(function( cmd ){
     return cmd
-      .replace('$VERSION', version)
-      .replace('$GIT', 'git')
-      .replace('$CD', 'cd')
-      .replace('$RM', 'rm -rf')
-      .replace('$CP', 'cp -R')
-      .replace('$TEMP_DIR', '/tmp')
-      .replace('$DOC_DIR', 'documentation')
-      .replace('$DL_DIR', 'download')
-      .replace('$NPM', 'npm')
-      .replace('$METEOR', 'meteor')
-      .replace('$SPM', 'spm')
+      .replace(/\$VERSION/g, version)
+      .replace(/\$GIT/, 'git')
+      .replace(/\$CD/, 'cd')
+      .replace(/\$RM/, 'rm -rf')
+      .replace(/\$CP/, 'cp -R')
+      .replace(/\$TEMP_DIR/, '/tmp')
+      .replace(/\$DOC_DIR/, 'documentation')
+      .replace(/\$DL_DIR/, 'download')
+      .replace(/\$NPM/, 'npm')
+      .replace(/\$METEOR/, 'meteor')
+      .replace(/\$SPM/, 'spm')
     ;
   });
 };
@@ -382,7 +382,7 @@ gulp.task('pubprep', function(next){
 
 gulp.task('pubpush', ['version'], shell.task( replaceShellVars([
   '$GIT add -A',
-  '$GIT commit -m "preparing to publish"',
+  '$GIT commit -m "preparing to publish $VERSION"',
   '$GIT push'
 ]) ));
 
