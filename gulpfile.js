@@ -202,18 +202,10 @@ gulp.task('zip', ['version', 'build'], function(){
 });
 
 gulp.task('test', ['concat'], function(next){
-  var cwd = process.cwd();
-
-  process.chdir('./test');
-
-  return gulp.src('*.js')
+  return gulp.src('test/*.js')
     .pipe( mocha({
       reporter: 'spec'
     }) )
-    
-    .once('end', function(){
-      process.chdir( cwd );
-    })
   ;
 });
 

@@ -1,16 +1,29 @@
 var expect = require('chai').expect;
 var weaver = require('../build/weaver.js', weaver);
 var $$ = weaver;
+var isNode = typeof module !== 'undefined';
 
 describe('Fabric', function(){
 
   var fabric;
+  
+  if( isNode ){ 
+    var cwd = process.cwd();
 
-  before(function(){
+    before(function(){
+      process.chdir('./test');
+    });
+
+    after(function(){
+      process.chdir( cwd );
+    });
+  }
+  
+  beforeEach(function(){
     fabric = $$.Fabric();
   });
-
-  after(function(){
+  
+  afterEach(function(){
     fabric.stop();
   });
 

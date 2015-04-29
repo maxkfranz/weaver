@@ -1,8 +1,21 @@
 var expect = require('chai').expect;
 var weaver = require('../build/weaver.js', weaver);
 var $$ = weaver;
+var isNode = typeof module !== 'undefined';
 
 describe('Thread', function(){
+
+  if( isNode ){ console.log('isNode')
+    var cwd = process.cwd();
+
+    before(function(){
+      process.chdir('./test');
+    });
+
+    after(function(){
+      process.chdir( cwd );
+    });
+  }
 
   it('resolves with a simple value', function( next ){
     var t = $$.Thread();
