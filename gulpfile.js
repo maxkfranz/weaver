@@ -22,7 +22,7 @@ var del = require('del');
 var vinylPaths = require('vinyl-paths');
 var clean = function(){ return vinylPaths(del) };
 
-var version = process.env['VERSION']; // used for marking builds w/ version etc
+var version; // used for marking builds w/ version etc
 
 var paths = {
   sources: [
@@ -65,7 +65,7 @@ var paths = {
 var replaceShellVars = function( cmds ){
   return cmds.map(function( cmd ){
     return cmd
-      .replace(/\$VERSION/g, version)
+      //.replace(/\$VERSION/g, version)
       .replace(/\$GIT/, 'git')
       .replace(/\$CD/, 'cd')
       .replace(/\$RM/, 'rm -rf')
