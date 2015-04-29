@@ -380,7 +380,7 @@ gulp.task('pubprep', function(next){
   runSequence('pkgver', 'dist', 'docspub', next);
 });
 
-gulp.task('pubpush', shell.task( replaceShellVars([
+gulp.task('pubpush', ['version'], shell.task( replaceShellVars([
   '$GIT add -A',
   '$GIT commit -m "preparing to publish $VERSION"',
   '$GIT push'
