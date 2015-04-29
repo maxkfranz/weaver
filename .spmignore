@@ -1,0 +1,9 @@
+documentation
+src
+test
+debug
+gulpfile.js
+*.sh
+bower.json
+README.md
+.DS_Store
