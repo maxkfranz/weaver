@@ -13,7 +13,7 @@
   * Meteor/Atmosphere
  * Has a full suite of unit tests that can be run in the browser or the terminal
  * Documentation includes live code examples, doubling as an interactive requirements specification
- * Abstracted and unified touch events on top of a familiar event model
+ * Threads and fabrics are reusable
  * Allows passing data to threads and fabrics
  * Allows requiring external functions
  * Uses promises to make managing your asynchronous workflows easier (and includes a small, internal polyfil for promiseless browsers)
