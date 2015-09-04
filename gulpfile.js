@@ -21,27 +21,34 @@ var source = require('vinyl-source-stream'); // converts node streams into vinyl
 var del = require('del');
 var vinylPaths = require('vinyl-paths');
 var clean = function(){ return vinylPaths(del) };
+var browserifyHeader = require('browserify-header');
+var vfs = require('vinyl-fs');
+var transform = require('vinyl-transform');
+var buffer = require('vinyl-buffer');
+var sourcemaps = require('gulp-sourcemaps');
+var livereload = require('gulp-livereload');
+var watchify = require('watchify');
+var derequire = require('gulp-derequire');
 
 var version; // used for marking builds w/ version etc
 
 var paths = {
-  sources: [
-    'src/preamble.js',
-    'src/namespace.js',
-    'src/promise.js',
-    'src/is.js',
-    'src/util.js',
-    'src/math.js',
-    'src/event.js',
-    'src/define.js',
-    'src/thread.js',
-    'src/fabric.js'
-  ],
+  sourceEntry: 'src/index.js',
+
+  preamble: 'src/preamble.js',
 
   nodethreadName: 'thread-node-fork.js',
   nodethreadSrc: [
     'src/preamble.js',
     'src/thread-node-fork.js'
+  ],
+
+  debugFiles: [
+    'build/weaver.js'
+  ],
+
+  testFiles: [
+    'build/weaver.js'
   ],
 
   docs: {
@@ -59,6 +66,15 @@ var paths = {
       'documentation/css/style.css'
     ]
   }
+};
+
+var browserifyOpts = {
+  entries: paths.sourceEntry,
+  debug: true,
+  builtins: [],
+  bundleExternal: false,
+  detectGlobals: false,
+  standalone: 'weaver'
 };
 
 // update these if you don't have a unix like env or these programmes aren't in your $PATH
@@ -124,33 +140,48 @@ gulp.task('clean', function(){
 });
 
 gulp.task('concat', ['version', 'nodeworker'], function(){
-  return gulp.src( paths.sources )
+  return browserify( browserifyOpts )
+    .plugin( browserifyHeader, { file: paths.preamble } )
+    .bundle()
+    .pipe( source('weaver.js') )
+    .pipe( buffer() )
+    .pipe( derequire() )
     .pipe( replace('{{VERSION}}', version) )
-
-    .pipe( concat('weaver.js') )
-
     .pipe( gulp.dest('build') )
   ;
 });
 
-gulp.task('build', ['version', 'nodeworker'], function(){
-  return gulp.src( paths.sources )
+gulp.task('build-unmin', ['version', 'nodeworker'], function(){
+  return browserify( browserifyOpts )
+    .plugin( browserifyHeader, { file: paths.preamble } )
+    .bundle()
+    .pipe( source('weaver.js') )
+    .pipe( buffer() )
+    .pipe( sourcemaps.init({ loadMaps: true }) )
+    .pipe( derequire() )
     .pipe( replace('{{VERSION}}', version) )
-
-    .pipe( concat('weaver.js') )
-
-    .pipe( gulp.dest('build') )
-
-    .pipe( uglify({
-      mangle: true,
-
-      preserveComments: 'some'
-    }) )
-
-    .pipe( concat('weaver.min.js') )
-
+    .pipe( sourcemaps.write('.') )
     .pipe( gulp.dest('build') )
   ;
+});
+
+gulp.task('build-min', ['version', 'nodeworker'], function(){
+  return browserify( browserifyOpts )
+    .plugin( browserifyHeader, { file: paths.preamble } )
+    .bundle()
+    .pipe( source('weaver.min.js') )
+    .pipe( buffer() )
+    .pipe( sourcemaps.init({ loadMaps: true }) )
+    .pipe( derequire() )
+    .pipe( replace('{{VERSION}}', version) )
+    .pipe( uglify({ mangle: true, preserveComments: 'some' }) )
+    .pipe( sourcemaps.write('.') )
+    .pipe( gulp.dest('build') )
+  ;
+});
+
+gulp.task('build', ['build-unmin', 'build-min'], function( next ){
+  next();
 });
 
 gulp.task('nodeworker', function(){
@@ -165,7 +196,7 @@ gulp.task('nodeworker', function(){
 
 gulp.task('debugrefs', function(){
   return gulp.src('debug/index.html')
-    .pipe( inject( gulp.src(paths.sources, { read: false }), {
+    .pipe( inject( gulp.src(paths.debugFiles, { read: false }), {
       addPrefix: '..',
       addRootSlash: false
     } ) )
@@ -176,7 +207,7 @@ gulp.task('debugrefs', function(){
 
 gulp.task('testrefs', function(){
   return gulp.src('test/index.html')
-    .pipe( inject( gulp.src(paths.sources, { read: false }), {
+    .pipe( inject( gulp.src(paths.testFiles, { read: false }), {
       addPrefix: '..',
       addRootSlash: false
     } ) )
@@ -203,7 +234,13 @@ gulp.task('refs', function(next){
 });
 
 gulp.task('zip', ['version', 'build'], function(){
-  return gulp.src(['build/weaver.js', 'build/weaver.min.js', 'LGPL-LICENSE.txt'])
+  return gulp.src([
+      'build/weaver.js',
+      'build/weaver.js.map',
+      'build/weaver.min.js',
+      'build/weaver.min.js.map',
+      'LGPL-LICENSE.txt'
+    ])
     .pipe( zip('weaver.js-' + version + '.zip') )
 
     .pipe( gulp.dest('build') )
@@ -229,7 +266,9 @@ gulp.task('docsver', ['version'], function(){
 gulp.task('docsjs', ['version', 'build'], function(){
   return gulp.src([
     'build/weaver.js',
+    'build/weaver.js.map',
     'build/weaver.min.js',
+    'build/weaver.min.js.map',
     'lib/*.js'
   ])
     .pipe( gulp.dest('documentation/js') )
@@ -265,7 +304,7 @@ gulp.task('snapshotpush', ['docsdl'], function(){
       '$GIT clone -b gh-pages https://github.com/maxkfranz/weaver.git $TEMP_DIR/weaver',
       '$CP $DOC_DIR/$DL_DIR/* $TEMP_DIR/weaver/$DL_DIR'
     ]) ) )
-    
+
     .pipe( shell( replaceShellVars([
       '$GIT add -A',
       '$GIT commit -a -m "updating list of builds"',
@@ -384,7 +423,9 @@ gulp.task('pkgver', ['version'], function(){
 gulp.task('dist', ['build'], function(){
   return gulp.src([
     'build/weaver.js',
+    'build/weaver.js.map',
     'build/weaver.min.js',
+    'build/weaver.min.js.map',
     'build/' + paths.nodethreadName
   ])
     .pipe( gulp.dest('dist') )
@@ -417,12 +458,12 @@ gulp.task('docspush', function(){
       '$GIT clone -b gh-pages https://github.com/maxkfranz/weaver.git $TEMP_DIR/weaver',
       '$CP $DOC_DIR/* $TEMP_DIR/weaver'
     ]) ) )
-  
+
     .pipe( shell( replaceShellVars([
       '$GIT add -A',
       '$GIT commit -a -m "updating docs to $VERSION"',
       '$GIT push origin'
-    ]), { cwd: $TEMP_DIR + '/weaver' } ) )  
+    ]), { cwd: $TEMP_DIR + '/weaver' } ) )
   ;
 });
 
@@ -433,7 +474,7 @@ gulp.task('unstabledocspush', function(){
       '$GIT clone -b gh-pages https://github.com/maxkfranz/weaver.git $TEMP_DIR/weaver',
       '$CP $DOC_DIR/* $TEMP_DIR/weaver/unstable'
     ]) ) )
-    
+
     .pipe( shell( replaceShellVars([
       '$GIT add -A',
       '$GIT commit -a -m "updating unstable docs to $VERSION"',
@@ -442,18 +483,6 @@ gulp.task('unstabledocspush', function(){
   ;
 });
 
-
-// browserify debug build
-gulp.task('browserify', ['build'], function(){
-  var b = browserify({ debug: true, hasExports: true });
-
-  b.add('./build/weaver.js', { expose: "weaver" });
-
-  return b.bundle()
-    .pipe( source('weaver.browserify.js') )
-    .pipe( gulp.dest('build') )
-  ;
-});
 
 gulp.task('npm', shell.task( replaceShellVars([
   '$NPM publish .'
@@ -468,22 +497,40 @@ gulp.task('spm', shell.task( replaceShellVars([
 ]) ));
 
 gulp.task('watch', function(next){
-  var watcher = gulp.watch(paths.sources, ['testrefs','debugrefs']);
-  watcher.on('added deleted', function(event){
-    console.log('File ' + event.path + ' was ' + event.type + ', updating lib refs in pages...');
-  });
+  livereload.listen();
 
-  var testWatcher = gulp.watch('test/*.js', ['testlist']);
-  testWatcher.on('added deleted', function(event){
-    console.log('File ' + event.path + ' was ' + event.type + ', updating test refs in pages...');
-  });
+  gulp.watch('test/*.js', ['testlist'])
+    .on('added deleted', function( event ){
+      console.log('File ' + event.path + ' was ' + event.type + ', updating test refs in pages...');
+    })
+  ;
+
+  var b = watchify( browserify({
+    entries: paths.sourceEntry,
+    debug: true,
+    standalone: 'weaver'
+  }) );
+
+  var rebuild = function(){
+    return b.bundle()
+      .pipe( source('weaver.js') )
+      .pipe( buffer() )
+      .pipe( derequire() )
+      .pipe( gulp.dest('build') )
+      .pipe( livereload() )
+    ;
+  };
+
+  rebuild();
+
+  b.on('update', rebuild);
 
   next();
 });
 
 // http://www.jshint.com/docs/options/
 gulp.task('lint', function(){
-  return gulp.src( paths.sources )
+  return gulp.src( 'src/**' )
     .pipe( jshint({
       funcscope: true,
       laxbreak: true,

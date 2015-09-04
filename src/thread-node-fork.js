@@ -1,5 +1,9 @@
 // normalised thread api functions for nodejs
 
+function reference( r ){
+  return eval(r);
+}
+
 // expose message() for client code to use
 function message( m ){
   process.send( m );
@@ -17,7 +21,7 @@ function listen( fn ){
     } else {
       fn( m );
     }
-  });  
+  });
 }
 
 function resolve( v ){
@@ -36,4 +40,4 @@ process.on('message', function( m ){
   if( typeof m === 'object' && m.$$eval ){
     eval( m.$$eval );
   }
-}); 
+});

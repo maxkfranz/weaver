@@ -1,88 +1,91 @@
-;(function($$, window){ 'use strict';
-  
-  // utility functions only for internal use
+'use strict';
 
-  $$.util = {
+var window = require('./window');
+var is = require('./is');
+var util;
 
-    // the jquery extend() function
-    // NB: modified to use $$.is etc since we can't use jquery functions
-    extend: function() {
-      var options, name, src, copy, copyIsArray, clone,
-        target = arguments[0] || {},
-        i = 1,
-        length = arguments.length,
-        deep = false;
+// utility functions only for internal use
+util = {
 
-      // Handle a deep copy situation
-      if ( typeof target === 'boolean' ) {
-        deep = target;
-        target = arguments[1] || {};
-        // skip the boolean and the target
-        i = 2;
-      }
+  // the jquery extend() function
+  // NB: modified to use is etc since we can't use jquery functions
+  extend: function() {
+    var options, name, src, copy, copyIsArray, clone,
+      target = arguments[0] || {},
+      i = 1,
+      length = arguments.length,
+      deep = false;
 
-      // Handle case when target is a string or something (possible in deep copy)
-      if ( typeof target !== 'object' && !$$.is.fn(target) ) {
-        target = {};
-      }
+    // Handle a deep copy situation
+    if ( typeof target === 'boolean' ) {
+      deep = target;
+      target = arguments[1] || {};
+      // skip the boolean and the target
+      i = 2;
+    }
 
-      // extend jQuery itself if only one argument is passed
-      if ( length === i ) {
-        target = this;
-        --i;
-      }
+    // Handle case when target is a string or something (possible in deep copy)
+    if ( typeof target !== 'object' && !is.fn(target) ) {
+      target = {};
+    }
 
-      for ( ; i < length; i++ ) {
-        // Only deal with non-null/undefined values
-        if ( (options = arguments[ i ]) != null ) {
-          // Extend the base object
-          for ( name in options ) {
-            src = target[ name ];
-            copy = options[ name ];
+    // extend jQuery itself if only one argument is passed
+    if ( length === i ) {
+      target = this;
+      --i;
+    }
 
-            // Prevent never-ending loop
-            if ( target === copy ) {
-              continue;
+    for ( ; i < length; i++ ) {
+      // Only deal with non-null/undefined values
+      if ( (options = arguments[ i ]) != null ) {
+        // Extend the base object
+        for ( name in options ) {
+          src = target[ name ];
+          copy = options[ name ];
+
+          // Prevent never-ending loop
+          if ( target === copy ) {
+            continue;
+          }
+
+          // Recurse if we're merging plain objects or arrays
+          if ( deep && copy && ( is.plainObject(copy) || (copyIsArray = is.array(copy)) ) ) {
+            if ( copyIsArray ) {
+              copyIsArray = false;
+              clone = src && is.array(src) ? src : [];
+
+            } else {
+              clone = src && is.plainObject(src) ? src : {};
             }
 
-            // Recurse if we're merging plain objects or arrays
-            if ( deep && copy && ( $$.is.plainObject(copy) || (copyIsArray = $$.is.array(copy)) ) ) {
-              if ( copyIsArray ) {
-                copyIsArray = false;
-                clone = src && $$.is.array(src) ? src : [];
+            // Never move original objects, clone them
+            target[ name ] = util.extend( deep, clone, copy );
 
-              } else {
-                clone = src && $$.is.plainObject(src) ? src : {};
-              }
-
-              // Never move original objects, clone them
-              target[ name ] = $$.util.extend( deep, clone, copy );
-
-            // Don't bring in undefined values
-            } else if ( copy !== undefined ) {
-              target[ name ] = copy;
-            }
+          // Don't bring in undefined values
+          } else if ( copy !== undefined ) {
+            target[ name ] = copy;
           }
         }
       }
+    }
 
-      // Return the modified object
-      return target;
-    },
+    // Return the modified object
+    return target;
+  },
 
-    error: function( msg ){
-      if( console ){
-        if( console.error ){
-          console.error.apply( console, arguments );
-        } else if( console.log ){
-          console.log.apply( console, arguments );
-        } else {
-          throw msg;
-        }
+  error: function( msg ){
+    if( console ){
+      if( console.error ){
+        console.error.apply( console, arguments );
+      } else if( console.log ){
+        console.log.apply( console, arguments );
       } else {
         throw msg;
       }
+    } else {
+      throw msg;
     }
-  };
+  }
+};
 
-})( weaver, typeof window === 'undefined' ? null : window  );
+module.exports = util;

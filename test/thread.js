@@ -5,7 +5,7 @@ var isNode = typeof module !== 'undefined';
 
 describe('Thread', function(){
 
-  if( isNode ){ console.log('isNode')
+  if( isNode ){
     var cwd = process.cwd();
 
     before(function(){
@@ -78,7 +78,7 @@ describe('Thread', function(){
     var t1 = $$.Thread();
     var t2 = $$.Thread();
 
-    $$.Promise.all([ // both threads done
+    Promise.all([ // both threads done
       t1.run(function(){
         resolve( 1 );
       }),
@@ -123,7 +123,7 @@ describe('Thread', function(){
 
   it('requires a named function', function( next ){
     var t = $$.Thread();
-    
+
     function foo(){
       return 'bar';
     }
@@ -145,9 +145,9 @@ describe('Thread', function(){
 
   it('requires a function with a prototype', function( next ){
     var t = $$.Thread();
-    
+
     function foo(){
-      
+
     }
 
     foo.prototype.bar = function(){
@@ -171,9 +171,9 @@ describe('Thread', function(){
 
   it('requires a function with a subfunction', function( next ){
     var t = $$.Thread();
-    
+
     function foo(){
-      
+
     }
 
     foo.bar = function(){
@@ -211,10 +211,10 @@ describe('Thread', function(){
       next();
     });
   });
-  
+
   it('requires an external file', function( next ){
     var t = $$.Thread();
-    
+
     t.require('./requires/foo.js');
 
     t.run(function(){
@@ -226,10 +226,10 @@ describe('Thread', function(){
       next();
     });
   });
-  
+
   it('requires an external file with ../', function( next ){
     var t = $$.Thread();
-    
+
     t.require('../test/requires/foo.js');
 
     t.run(function(){
@@ -509,6 +509,43 @@ describe('Thread', function(){
       t.stop();
       next();
     });
+  });
+
+  it('falls back to timout w/ no threads', function( next ){
+    var t = $$.Thread({
+      disabled: true
+    });
+
+    t.run(function(){
+      resolve( 3 );
+    }).then(function( val ){
+      expect( val ).to.equal(3);
+
+      t.stop();
+
+      next();
+    });
+  });
+
+  it('fallback thread hears a message and roundtrips back', function( next ){
+    var t = $$.Thread({ disabled: true });
+    var msg;
+
+    t.run(function(){
+      listen(function( m ){
+        message(m);
+      });
+    });
+
+    t.on('message', function(e){
+      expect( e.message ).to.equal('hello there');
+
+      t.stop();
+
+      next();
+    });
+
+    t.message('hello there');
   });
 
 });

@@ -7,19 +7,12 @@
 
   <script src="lib/chai.js"></script>
   <script src="lib/jquery.js"></script>
+  <script src="lib/bluebird.js"></script>
 
   <!-- `gulp testrefs` updates these scripts -->
 
   <!-- inject:js -->
-  <script src="../src/preamble.js"></script>
-  <script src="../src/namespace.js"></script>
-  <script src="../src/promise.js"></script>
-  <script src="../src/is.js"></script>
-  <script src="../src/util.js"></script>
-  <script src="../src/event.js"></script>
-  <script src="../src/define.js"></script>
-  <script src="../src/thread.js"></script>
-  <script src="../src/fabric.js"></script>
+  <script src="../build/weaver.js"></script>
   <!-- endinject -->
 
   <script>
@@ -43,7 +36,7 @@
     <script src="fabric.js"></script>
     <script src="thread.js"></script>
     <!-- endinject -->
-  
+
     <script>mocha.checkLeaks(); mocha.run();</script>
 
     <div id="cy"></div>
