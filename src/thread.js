@@ -231,7 +231,6 @@ util.extend(thdfn, {
           var fnPre = fnStr + '';
 
           fnStr = [
-            'function reference(r){ return eval(r); };',
             'function broadcast(m){ return message(m); };', // alias
             'function message(m){ postMessage(m); };',
             'function listen(fn){',
@@ -325,8 +324,6 @@ util.extend(thdfn, {
           listeners: [],
 
           exec: function(){
-            function reference(r){ return eval(r); }
-
             function broadcast(m){ return message(m); } // alias
 
             function message(m){

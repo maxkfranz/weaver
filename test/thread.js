@@ -548,4 +548,41 @@ describe('Thread', function(){
     t.message('hello there');
   });
 
+  it('fallback thread can use require()', function( next ){
+    var t = $$.Thread({ disabled: true });
+    var msg;
+
+    function foo(){ return 'bar'; }
+
+    t.require( foo ).promise(function(){
+      return foo();
+    }).then(function( ret ){
+      expect( ret ).to.equal('bar');
+
+      t.stop();
+      next();
+    });
+  });
+
+  it('can access required function in listener with threading disabled', function( next ){
+    var t = $$.thread({ disabled: true });
+
+    function foo(){
+      return 'bar';
+    }
+
+    t.require( foo ).promise(function(){
+      listen(function(m){
+        resolve( foo() );
+      });
+    }).then(function( bar ){
+      expect( bar ).to.equal('bar');
+
+      t.stop();
+      next();
+    });
+
+    t.message('triggerlistener');
+  });
+
 });
