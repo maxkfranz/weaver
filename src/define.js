@@ -2,8 +2,8 @@
 
 var is = require('./is');
 var util = require('./util');
-var Promise = require('./Promise');
-var Event = require('./Event');
+var Promise = require('./promise');
+var Event = require('./event');
 
 var define = {
 
