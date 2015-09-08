@@ -2,6 +2,8 @@ var expect = require('chai').expect;
 var weaver = require('../build/weaver.js', weaver);
 var $$ = weaver;
 var isNode = typeof module !== 'undefined';
+var bluebird = require('bluebird');
+var Promise = bluebird;
 
 describe('Thread', function(){
 
