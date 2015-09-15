@@ -18,23 +18,6 @@ If you're looking to get an old version of the library, you can build off the as
 
 Weaver.js is an open source project, and anyone interested is encouraged to contribute to Weaver.js.  We gladly accept pull requests.
 
-If your pull request is a bugfix, please make changes to the master branch.  Otherwise, please make changes to the next version's branch (i.e. unstable).
-
-
-
-
-
-
-
-## Adding source files
-
-When adding source (.js) files to the repository, update the list of JS files in `gulpfile.js`.  You can update the references to these JS files in the tests and debug page et cetera with `gulp`:
-
- 1. `gulp debugrefs` : Update the JS files referenced in the debug page (`debug/index.html`).
- 1. `gulp testrefs` : Update the JS files referenced in the test page (`test/index.html`).
- 1. `gulp testlist` : Update the JS test files referenced in the test page (`test/index.html`).
-
-Or you can do them together via `gulp refs`.
 
 
 
@@ -59,7 +42,6 @@ Run `gulp` in the console.  The main targets are:
  * `refs` : update all refs
   * `testrefs` : update JS lib file refs in the tests page
   * `testlist` : update list of test JS files in tests page
-  * `debugrefs` : update JS lib file refs in debug page
 
 **Testing:**
  * `test` : run the Mocha unit tests
@@ -71,7 +53,6 @@ Run `gulp` in the console.  The main targets are:
  * `docsmin` : build the documentation template with all resources minified
  * `docspub` : build the documentation for publishing (ZIPs, JS refs, etc.)
  * `docspush` : push the built documentation to production
- * `unstabledocspush` : push the built documentation to unstable
 
 
 

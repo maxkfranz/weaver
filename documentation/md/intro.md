@@ -19,6 +19,7 @@
  * Uses promises to make managing your asynchronous workflows easier (and includes a small, internal polyfil for promiseless browsers)
  * Includes multitasking versions of popular array functions
  * Chainable for convenience
+ * Falls back on no-threads implementation for environments that do not support multitasking
  * Well maintained, with only a sliver of active bug time (i.e. minimised time to bugfix)
 
 

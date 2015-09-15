@@ -2,8 +2,6 @@
 
 'use strict';
 
-var window = require('./window');
-
 var typeofstr = typeof '';
 var typeofobj = typeof {};
 var typeoffn = typeof function(){};

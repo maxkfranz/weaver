@@ -540,7 +540,13 @@ gulp.task('lint', function(){
       eqnull: true,
       sub: true,
       shadow: true,
-      laxcomma: true
+      laxcomma: true,
+      node: true,
+      globals: {
+        navigator: true,
+        Blob: true,
+        Worker: true
+      }
     }) )
 
     .pipe( jshint.reporter(jshStylish) )

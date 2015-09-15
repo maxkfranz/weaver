@@ -1,6 +1,5 @@
 'use strict';
 
-var window = require('./window');
 var is = require('./is');
 var util;
 

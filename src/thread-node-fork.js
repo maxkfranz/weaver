@@ -1,8 +1,6 @@
-// normalised thread api functions for nodejs
+/* jshint ignore:start */
 
-function reference( r ){
-  return eval(r);
-}
+// normalised thread api functions for nodejs
 
 // expose message() for client code to use
 function message( m ){
@@ -41,3 +39,5 @@ process.on('message', function( m ){
     eval( m.$$eval );
   }
 });
+
+/* jshint ignore:end */
