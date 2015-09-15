@@ -1,5 +1,5 @@
 /*!
- * This file is part of Weaver.js ,.
+ * This file is part of Weaver.js 1.0.2.
  * 
  * Weaver.js is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the Free
@@ -15,6 +15,8 @@
  * Weaver.js. If not, see <http://www.gnu.org/licenses/>.
  */
  
+
+/* jshint ignore:start */
 
 // normalised thread api functions for nodejs
 
@@ -35,7 +37,7 @@ function listen( fn ){
     } else {
       fn( m );
     }
-  });  
+  });
 }
 
 function resolve( v ){
@@ -54,4 +56,6 @@ process.on('message', function( m ){
   if( typeof m === 'object' && m.$$eval ){
     eval( m.$$eval );
   }
-}); 
+});
+
+/* jshint ignore:end */
