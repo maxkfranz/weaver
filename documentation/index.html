@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-		<link rel="canonical" href="http://js.cytoscape.org" />
-		<meta name="description" content="Concise and readable multitasking (compatible with CommonJS/Node.js/io.js, AMD/Require.js, npm, Bower, spm, Meteor/Atmosphere, and plain JavaScript)">
+		<link rel="canonical" href="http://weaver.js.org" />
+		<meta name="description" content="Concise and readable multitasking (compatible with CommonJS/Node.js, AMD/Require.js, npm, Bower, spm, Meteor/Atmosphere, and plain JavaScript)">
 		<meta name="author" content="Max Franz">
 		<meta name="robots" content="all" />
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimal-ui">
@@ -266,10 +266,11 @@
 			<div class="buttons-subtitle">
 				<a class="button green" target="_blank" href="https://github.com/maxkfranz/weaver"><span class="icon-github-alt"></span> GitHub</a>
 
-				<a id="download-button" class="button green" href="download/weaver.js-1.0.2.zip"><span class="icon-download-alt"></span> Download 1.0.2</a>
+				<a id="download-button" class="button green" href="download/weaver.js-1.1.0.zip"><span class="icon-download-alt"></span> Download 1.1.0</a>
 			</div>
 
 			<div class="links">
+				<a target="_blank" href="demo.html"><span class="icon-time"></span> Performance demo</a> |
 				<a target="_blank" href="https://twitter.com/maxkfranz"><span class="icon-twitter"></span> Twitter</a> |
 				<a target="_blank" href="https://github.com/maxkfranz/weaver/issues/new"><span class="icon-bug"></span> File an issue or request a feature</a> |
 				<a target="_blank" href="http://stackoverflow.com/questions/tagged/weaver.js"><span class="icon-question"></span> Previous questions</a> |
@@ -291,7 +292,8 @@
 				
 
 				
-					<h2 id="introduction/factsheet">Factsheet <a href="#introduction/factsheet"><span class="icon-bookmark"></span></a></h2>
+					<p>Expensive calculations make your app painfully slow for your users. You can make parallelisable code much faster by using Weaver.js, making your app snappier and your users happier.</p>
+<h2 id="introduction/factsheet">Factsheet <a href="#introduction/factsheet"><span class="icon-bookmark"></span></a></h2>
 <ul>
 <li>Allows for both low level thread management and higher level thread management via fabrics</li>
 <li>Truely free and open source (LGPL3+)</li>
@@ -407,7 +409,9 @@
 					<h2 id="thread/minification">Minification <a href="#thread/minification"><span class="icon-bookmark"></span></a></h2>
 
 					
-						<p>TODO</p>
+						<p>When code is run through a minifer like <a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a>, the names of variables can be mangled.  This means that the name specified in your code for a function or object may not be the same when it is minified.</p>
+<p>Because Weaver is limited to what JS engines provide in terms of live code inspection, this means that minification can break the references made in <code>thread.run()</code>.</p>
+<p>In order to minify Weaver-using code, it is necessary to have more fastidious use of references.  By explicitly naming references using  <a href="#thread/execution/thread.require"><code>thread.require( obj, &#39;obj&#39; )</code></a> and <a href="#thread/globals/_ref_"><code>_ref_( &#39;obj&#39; )</code></a>, minification will work properly.</p>
 
 					
 
@@ -747,7 +751,7 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 												<li>
 													<span class="name">as</span>
 													<span class="optional">[optional]</span>
-													<span class="descr"><p>The name of the object as available in the thread.  This is mandatory for an object that is not a named function, because its name can not be automatically inferred.</p>
+													<span class="descr"><p>The name of the object as available in the thread.  This is mandatory for an object that is not a named function, because its name can not be automatically inferred.  This is also mandatory if minification is used, to prevent mangling.</p>
 </span>
 
 													
@@ -761,7 +765,17 @@ t.message({ foo: <span class="hljs-string">'hello'</span>, bar: <span class="hlj
 
 							<div class="details">
 								
-									<h3 id="examples">Examples</h3>
+									<h3 id="details">Details</h3>
+<p>This function allows for pulling external code into the thread.  A thread can require</p>
+<ul>
+<li>a plain JSON-serialisable object,</li>
+<li>a function that does not reference externals (external functions or external objects),</li>
+<li>a function that references externals which have also been required,</li>
+<li>a simple object with a prototype, and</li>
+<li>external JS files.</li>
+</ul>
+<p>To avoid <a href="#thread/minification">issues with minification</a>, it is necessary to explicitly specify the name of a required entity, e.g. <code>thread.require( foo, &#39;foo&#39; )</code>.</p>
+<h3 id="examples">Examples</h3>
 <pre><code class="lang-js"><span class="hljs-keyword">var</span> t = weaver.thread();
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>)</span>{
