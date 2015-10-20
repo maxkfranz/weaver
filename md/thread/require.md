@@ -1,3 +1,15 @@
+## Details
+
+This function allows for pulling external code into the thread.  A thread can require
+
+* a plain JSON-serialisable object,
+* a function that does not reference externals (external functions or external objects),
+* a function that references externals which have also been required,
+* a simple object with a prototype, and
+* external JS files.
+
+To avoid [issues with minification](#thread/minification), it is necessary to explicitly specify the name of a required entity, e.g. `thread.require( foo, 'foo' )`.
+
 ## Examples
 
 ```js
