@@ -1,0 +1,108 @@
+<!doctype>
+<html>
+
+  <head>
+
+    <title>Weaver.js performance demo</title>
+
+    <script src="http://weaver.js.org/api/weaver.js-latest/weaver.js"></script>
+
+    <script>
+      window.addEventListener('load', function(){ setTimeout(function(){
+        // setup
+
+        function expensiveCalc( val ){
+          for( var i = 0; i < 100000; i++ ){
+            val = Math.sqrt( val );
+          }
+        }
+
+        var N = 10000;
+        var arr = [];
+
+        for( var i = 0; i < N; i++ ){
+          arr.push( Math.random() );
+        }
+
+        var fabric = weaver.fabric();
+
+        function logResults(){
+          var $ = document.getElementById.bind( document );
+
+          $('working').innerHTML = 'Done!  Lower times are better:';
+
+          $('single-time').innerHTML = Math.round(tSingle) + ' ms';
+          $('weaver-time').innerHTML = Math.round(tWeaver) + ' ms';
+
+          var max = Math.max( tSingle, tWeaver );
+
+          $('single').style.width = ( tSingle / max * 100 ) + '%';
+          $('weaver').style.width = ( tWeaver / max * 100 ) + '%';
+        }
+
+
+        // single threaded
+
+        var tSingle = performance.now();
+        var singleResult = [];
+
+        for( var i = 0; i < N; i++ ){
+          singleResult.push( expensiveCalc( arr[i] ) );
+        }
+
+        tSingle = performance.now() - tSingle;
+
+        console.log('single threaded time: ' + tSingle);
+
+
+
+        // weaver multithreaded
+
+        var tWeaver = performance.now();
+
+        fabric.pass( arr ).map( expensiveCalc ).then(function( mapped ){
+          tWeaver = performance.now() - tWeaver;
+
+          console.log('weaver time: ' + tWeaver);
+
+          logResults();
+        });
+
+      }, 100); });
+    </script>
+
+    <style>
+      body { margin: 1em; padding: 0; font: 14px helvetica neue, helvetica, liberation sans, arial, sans-serif; }
+      h1 { font-weight: 400; }
+      .bar { height: 2em; margin-top: 2em; width: 1%; transition-property: width; transition-duration: 750ms; transition-timing-function: ease-out; }
+      .red { background-color: #f97f83; }
+      .blue { background-color: #817ff9; }
+      .linkbtn { background: #42C483; color: #fff; border-radius: 0.25em; padding: 0.25em 0.5em; text-decoration: none; font-size: 1.25em; }
+      .section { margin: 2em 0; }
+      p { margin: 1em 0; }
+    </style>
+  </head>
+
+  <body>
+    <h1>Weaver.js performance demo</h1>
+
+    <div><span id="working">Working...</span></div>
+
+    <div id="single" class="bar blue"></div>
+    <div>Main thread: <span id="single-time" class="time">...</span></div>
+
+    <div id="weaver" class="bar red"></div>
+    <div>Weaver: <span id="weaver-time" class="time">...</span></div>
+
+    <div class="section">
+      <p>
+        Expensive calculations can make your app painfully slow for your users.
+        You can make parallelisable code much faster by using Weaver.js, making your
+        app snappier and your users happier.
+      </p>
+
+      <p><a class="linkbtn" href="http://weaver.js.org/">Get Weaver.js</a></p>
+    </div>
+  </body>
+
+</html>

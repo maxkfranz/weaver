@@ -1,3 +1,7 @@
+Expensive calculations can make your app painfully slow for your users. You can make parallelisable code much faster by using Weaver.js, making your app snappier and your users happier.
+
+
+
 ## Factsheet
 
  * Allows for both low level thread management and higher level thread management via fabrics
