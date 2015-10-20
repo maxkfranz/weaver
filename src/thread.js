@@ -44,9 +44,6 @@ var fnAsRequire = function( fn ){
   var req;
   var fnName;
 
-  console.dir( fn );
-  console.dir( fn.fn.toString() );
-
   if( is.object(fn) && fn.fn ){ // manual fn
     req = fnAs( fn.fn, fn.name );
     fnName = fn.name;
@@ -124,8 +121,6 @@ var fnAsRequire = function( fn ){
     protoreq( val, subname ); // subobject with prototype
   } }
 
-  console.log(req);
-
   return req;
 };
 
@@ -163,12 +158,6 @@ util.extend(thdfn, {
     }
 
     requires.push( fn );
-
-    // also provide access to the implicit name for minification
-    var spec = fn;
-    if( spec.fn && spec.name !== spec.fn.name ){
-      requires.push({ name: spec.fn.name, fn: spec.fn });
-    }
 
     return this; // chaining
   },
@@ -246,7 +235,7 @@ util.extend(thdfn, {
           var fnPre = fnStr + '';
 
           fnStr = [
-            'function fromRequire(o){ return eval(o); };',
+            'function _ref_(o){ return eval(o); };',
             'function broadcast(m){ return message(m); };', // alias
             'function message(m){ postMessage(m); };',
             'function listen(fn){',
@@ -342,7 +331,7 @@ util.extend(thdfn, {
           exec: function(){
             // as a string so it can't be mangled by minifiers and processors
             fnStr = [
-              'function fromRequire(o){ return eval(o); };',
+              'function _ref_(o){ return eval(o); };',
               'function broadcast(m){ return message(m); };',
               'function message(m){ self.trigger( new Event({}, { type: "message", message: m }) ); };',
               'function listen(fn){ timer.listeners.push( fn ); };',
@@ -433,7 +422,7 @@ util.extend(thdfn, {
 // turns a stringified function into a (re)named function
 var fnAs = function( fn, name ){
   var fnStr = fn.toString();
-  fnStr = fnStr.replace(/function\s+\w*\s*\(/, 'function ' + name + '(');
+  fnStr = fnStr.replace(/function\s*\S*\s*\(/, 'function ' + name + '(');
 
   return fnStr;
 };
