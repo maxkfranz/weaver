@@ -199,13 +199,55 @@ button:active {
 	background: #fff;
 	z-index: 999999;
 	opacity: 1;
-	
+
 	transition: opacity ease-out 150ms;
 }
 
 #navigation .toc {
 	font-weight: 200;
-	margin: 0.5em 0;
+	margin: 0;
+	position: fixed;
+	width: 15em;
+	top: 0;
+	left: 0;
+	background: #fff;
+	z-index: 9999;
+	padding: 0.5em 0;
+}
+
+.toc-top {
+}
+
+#toc-clear {
+	position: absolute;
+	margin-left: -1.5em;
+}
+
+#toc-input {
+	display: inline-block;
+	width: 11.5em;
+	font: inherit;
+	font-family: FontAwesome, Helvetica Neue, Helvetica, Adobe Helvetica, DejaVu Sans, Arial, sans-serif;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	margin-left: 0.5em;
+	padding: 0 0.5em;
+	border-radius: 1em;
+	background: #f5f5f5;
+}
+
+.toc-sections {
+	margin-top: 3em;
+
+	transition-property: opacity;
+	transition-duration: 125ms;
+	transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+	opacity: 1;
+}
+
+.toc-sections-searching {
+	opacity: 0.5;
 }
 
 #navigation .lvl1 {
@@ -576,6 +618,11 @@ a,
 	cursor: pointer;
 }
 
+.plain-link {
+	color: #000;
+	border-bottom: 0;
+}
+
 a.light,
 a.toclink {
 	border-bottom: 2px solid rgba(65, 131, 196, 0.2);
@@ -746,6 +793,8 @@ pre code {
 	margin: 1em 0.75em;
 	padding: 0 0.25em;
 	cursor: pointer;
+	background: rgba(255, 255, 255, 0.9);
+	border-radius: 0.25em;
 }
 
 
@@ -819,7 +868,7 @@ and (orientation:portrait) {
 	z-index: 9999;
 	opacity: 0;
 	pointer-events: none;
-	
+
 	transition: opacity ease-out 150ms;
 }
 
