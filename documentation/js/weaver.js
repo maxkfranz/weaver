@@ -1,5 +1,5 @@
 /*!
- * This file is part of Weaver.js 1.0.2.
+ * This file is part of Weaver.js 1.1.0.
  * 
  * Weaver.js is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the Free
@@ -543,7 +543,7 @@ util.extend(fabfn, {
     if( is.array(data) ){
       pass.push( data );
     } else {
-      util.error('Only arrays or collections may be used with fabric.pass()');
+      throw 'Only arrays may be used with fabric.pass()';
     }
 
     return this; // chaining
@@ -771,7 +771,7 @@ var weaver = function(){ // jshint ignore:line
   return;
 };
 
-weaver.version = '1.0.2';
+weaver.version = '1.1.0';
 
 weaver.thread = weaver.Thread = weaver.worker = weaver.Worker = Thread;
 weaver.fabric = weaver.Fabric = Fabric;
@@ -1206,6 +1206,8 @@ util.extend(thdfn, {
   instanceString: function(){ return 'thread'; },
 
   require: function( fn, as ){
+    var requires = this._private.requires;
+
     if( isPathStr(fn) ){
       this._private.files.push( fn );
 
@@ -1214,18 +1216,21 @@ util.extend(thdfn, {
 
     if( as ){
       if( is.fn(fn) ){
-        // disabled b/c doesn't work with forced names on functions w/ prototypes
-        //fn = fnAs( fn, as );
-
-        as = as || fn.name;
-
         fn = { name: as, fn: fn };
       } else {
         fn = { name: as, obj: fn };
       }
+    } else {
+      if( is.fn(fn) ){
+        if( !fn.name ){
+          throw 'The function name could not be automatically determined.  Use thread.require( someFunction, "someFunction" )';
+        }
+
+        fn = { name: fn.name, fn: fn };
+      }
     }
 
-    this._private.requires.push( fn );
+    requires.push( fn );
 
     return this; // chaining
   },
@@ -1242,8 +1247,7 @@ util.extend(thdfn, {
     pass = pass || _p.pass.shift();
 
     if( _p.stopped ){
-      util.error('Attempted to run a stopped thread!  Start a new thread or do not stop the existing thread and reuse it.');
-      return;
+      throw 'Attempted to run a stopped thread!  Start a new thread or do not stop the existing thread and reuse it.';
     }
 
     if( _p.running ){
@@ -1304,6 +1308,7 @@ util.extend(thdfn, {
           var fnPre = fnStr + '';
 
           fnStr = [
+            'function _ref_(o){ return eval(o); };',
             'function broadcast(m){ return message(m); };', // alias
             'function message(m){ postMessage(m); };',
             'function listen(fn){',
@@ -1397,23 +1402,15 @@ util.extend(thdfn, {
           listeners: [],
 
           exec: function(){
-            function broadcast(m){ return message(m); } // jshint ignore:line
-
-            function message(m){ // jshint ignore:line
-              self.trigger( new Event({}, { type: 'message', message: m }) );
-            }
-
-            function listen(fn){ // jshint ignore:line
-              timer.listeners.push( fn );
-            }
-
-            function resolve(v){ // jshint ignore:line
-              promiseResolve(v);
-            }
-
-            function reject(v){ // jshint ignore:line
-              promiseReject(v);
-            }
+            // as a string so it can't be mangled by minifiers and processors
+            fnStr = [
+              'function _ref_(o){ return eval(o); };',
+              'function broadcast(m){ return message(m); };',
+              'function message(m){ self.trigger( new Event({}, { type: "message", message: m }) ); };',
+              'function listen(fn){ timer.listeners.push( fn ); };',
+              'function resolve(v){ promiseResolve(v); };',
+              'function reject(v){ promiseReject(v); };'
+            ].join('\n') + fnStr;
 
             // the .run() code
             eval( fnStr ); // jshint ignore:line
@@ -1495,9 +1492,10 @@ util.extend(thdfn, {
 
 });
 
+// turns a stringified function into a (re)named function
 var fnAs = function( fn, name ){
   var fnStr = fn.toString();
-  fnStr = fnStr.replace(/function.*\(/, 'function ' + name + '(');
+  fnStr = fnStr.replace(/function\s*\S*\s*\(/, 'function ' + name + '(');
 
   return fnStr;
 };

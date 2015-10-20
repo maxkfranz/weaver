@@ -1,5 +1,5 @@
 /*!
- * This file is part of Weaver.js 1.0.2.
+ * This file is part of Weaver.js 1.1.0.
  * 
  * Weaver.js is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the Free
@@ -54,6 +54,10 @@ function reject( v ){
 
 process.on('message', function( m ){
   if( typeof m === 'object' && m.$$eval ){
+    function _ref_( o ){
+      return eval( o );
+    }
+
     eval( m.$$eval );
   }
 });
