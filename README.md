@@ -16,7 +16,7 @@ If you're looking to get an old version of the library, you can build off the as
 
 ## Contributing to Weaver.js
 
-Weaver.js is an open source project, and anyone interested is encouraged to contribute to Weaver.js.  We gladly accept pull requests.
+Please refer to [CONTRIBUTING.md](CONTRIBUTING.md).
 
 
 
