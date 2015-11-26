@@ -1,5 +1,5 @@
 /*!
- * This file is part of Weaver.js 1.1.0.
+ * This file is part of Weaver.js 1.1.1.
  * 
  * Weaver.js is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the Free
@@ -771,7 +771,7 @@ var weaver = function(){ // jshint ignore:line
   return;
 };
 
-weaver.version = '1.1.0';
+weaver.version = '1.1.1';
 
 weaver.thread = weaver.Thread = weaver.worker = weaver.Worker = Thread;
 weaver.fabric = weaver.Fabric = Fabric;
@@ -1495,7 +1495,7 @@ util.extend(thdfn, {
 // turns a stringified function into a (re)named function
 var fnAs = function( fn, name ){
   var fnStr = fn.toString();
-  fnStr = fnStr.replace(/function\s*\S*\s*\(/, 'function ' + name + '(');
+  fnStr = fnStr.replace(/function\s*?\S*?\s*?\(/, 'function ' + name + '(');
 
   return fnStr;
 };
