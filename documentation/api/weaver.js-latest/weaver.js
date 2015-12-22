@@ -1,5 +1,5 @@
 /*!
- * This file is part of Weaver.js 1.1.1.
+ * This file is part of Weaver.js 1.1.2.
  * 
  * Weaver.js is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the Free
@@ -771,7 +771,7 @@ var weaver = function(){ // jshint ignore:line
   return;
 };
 
-weaver.version = '1.1.1';
+weaver.version = '1.1.2';
 
 weaver.thread = weaver.Thread = weaver.worker = weaver.Worker = Thread;
 weaver.fabric = weaver.Fabric = Fabric;
@@ -1107,7 +1107,7 @@ var Thread = function( opts ){
 var thdfn = Thread.prototype; // short alias
 
 var stringifyFieldVal = function( val ){
-  var valStr = is.fn( val ) ? val.toString() : 'JSON.parse("' + JSON.stringify(val) + '")';
+  var valStr = is.fn( val ) ? val.toString() : "JSON.parse('" + JSON.stringify(val) + "')";
 
   return valStr;
 };
