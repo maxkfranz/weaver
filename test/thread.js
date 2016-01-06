@@ -1,3 +1,5 @@
+/*! Weaver licensed under MIT (https://tldrlegal.com/license/mit-license), copyright Max Franz */
+
 var expect = require('chai').expect;
 var weaver = require('../build/weaver.js', weaver);
 var $$ = weaver;
