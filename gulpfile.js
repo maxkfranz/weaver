@@ -37,10 +37,10 @@ var paths = {
 
   preamble: 'src/preamble.js',
 
-  nodethreadName: 'thread-node-fork.js',
+  nodethreadName: 'thread-node.js',
   nodethreadSrc: [
     'src/preamble.js',
-    'src/thread-node-fork.js'
+    'src/thread-node.js'
   ],
 
   debugFiles: [

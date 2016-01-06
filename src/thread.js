@@ -227,11 +227,11 @@ util.extend(thdfn, {
       _p.requires = [];
       _p.files = [];
 
-      if( useWW ){
+      if( useWW || useNode ){
         var fnBlob, fnUrl;
 
         // add normalised thread api functions
-        if( !threadTechAlreadyExists ){
+        if( !threadTechAlreadyExists && useWW ){
           var fnPre = fnStr + '';
 
           fnStr = [
@@ -259,17 +259,22 @@ util.extend(thdfn, {
           fnUrl = window.URL.createObjectURL( fnBlob );
         }
         // create webworker and let it exec the serialised code
-        var ww = _p.webworker = _p.webworker || new Worker( fnUrl );
+        var ww;
 
-        if( threadTechAlreadyExists ){ // then just exec new run() code
-          ww.postMessage({
-            $$eval: fnStr
-          });
+        if( !_p.webworker ){
+          if( useWW ){
+            _p.webworker = new Worker( fnUrl );
+          } else {
+            var Worker = eval(" require('webworker-threads').Worker ");
+            var workerPath = eval(" require.resolve( require('path').join(__dirname, 'thread-node') ) ");
+            _p.webworker = eval(" new Worker( workerPath ) ");
+          }
         }
+        ww = _p.webworker;
 
         // worker messages => events
         var cb;
-        ww.addEventListener('message', cb = function( m ){
+        ww.addEventListener('message', cb = function( m ){ console.log('message', m)
           var isObject = is.object(m) && is.object( m.data );
 
           if( isObject && ('$$resolve' in m.data) ){
@@ -285,39 +290,27 @@ util.extend(thdfn, {
           }
         }, false);
 
+        // TODO webworker-threads doesn't get events properly...
+
+        ww.addEventListener('message', function(e){
+          console.log('message1');
+        });
+
+        ww.onmessage = function(m){
+          console.log('message2', m.data);
+        };
+
+        // thread exists => run just the passed code
+        // useNode => need to pass run code b/c can't be stringified
+        if( threadTechAlreadyExists || useNode ){
+          ww.postMessage({
+            $$eval: fnStr
+          });
+        }
+
         if( !threadTechAlreadyExists ){
           ww.postMessage('$$start'); // start up the worker
         }
-
-      } else if( useNode ){
-        // create a new process
-
-        if( !_p.child ){
-          _p.child = ( require('child_process').fork( require('path').join(__dirname, 'thread-node-fork') ) );
-        }
-
-        var child = _p.child;
-
-        // child process messages => events
-        var cb;
-        child.on('message', cb = function( m ){
-          if( is.object(m) && ('$$resolve' in m) ){
-            child.removeListener('message', cb); // done listening b/c resolve()
-
-            resolve( m.$$resolve );
-          } else if( is.object(m) && ('$$reject' in m) ){
-            child.removeListener('message', cb); // done listening b/c reject()
-
-            reject( m.$$reject );
-          } else {
-            self.trigger( new Event({}, { type: 'message', message: m }) );
-          }
-        });
-
-        // ask the child process to eval the worker code
-        child.send({
-          $$eval: fnStr
-        });
 
       } else { // use a fallback mechanism using a timeout
 
@@ -382,10 +375,6 @@ util.extend(thdfn, {
       _p.webworker.postMessage( m );
     }
 
-    if( _p.child ){
-      _p.child.send( m );
-    }
-
     if( _p.timer ){
       _p.timer.message( m );
     }
@@ -398,10 +387,6 @@ util.extend(thdfn, {
 
     if( _p.webworker ){
       _p.webworker.terminate();
-    }
-
-    if( _p.child ){
-      _p.child.kill();
     }
 
     if( _p.timer ){
