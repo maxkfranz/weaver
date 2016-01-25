@@ -5,7 +5,7 @@ Expensive calculations can make your app painfully slow for your users. You can 
 ## Factsheet
 
  * Allows for both low level thread management and higher level thread management via fabrics
- * Truely free and open source (LGPL3+)
+ * Permissive open source license (MIT)
  * Dependency free
  * Compatible with
   * All modern browsers
