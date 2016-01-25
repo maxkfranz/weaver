@@ -1,7 +1,7 @@
 {
   "name": "weaverjs",
-  "version": "1.1.2",
-  "license": "LGPL-3.0+",
+  "version": "1.2.0-unstable",
+  "license": "MIT",
   "description": "Concise and readable multitasking",
   "homepage": "http://weaver.js.org",
   "repository": {
