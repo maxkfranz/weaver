@@ -239,7 +239,7 @@ gulp.task('zip', ['version', 'build'], function(){
       'build/weaver.js.map',
       'build/weaver.min.js',
       'build/weaver.min.js.map',
-      'LGPL-LICENSE.txt'
+      'LICENSE'
     ])
     .pipe( zip('weaver.js-' + version + '.zip') )
 
