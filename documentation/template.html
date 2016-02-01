@@ -25,13 +25,13 @@
 
 	<body>
 
-		<div id="navigation">
-			<div class="toc">
-				<input id="toc-input" type="text" placeholder="&#61442; Find sections"></input>
-				<a id="toc-clear" class="plain-link"><span class="icon-remove"></span></a>
-				<a href="#top" class="plain-link"><span class="icon-arrow-up"></span></a>
-			</div>
+		<div class="toc-search">
+			<input id="toc-input" type="text" placeholder="&#61442; Find sections"></input>
+			<a id="toc-clear" class="plain-link"><span class="icon-remove"></span></a>
+			<a id="toc-top" href="#top" class="plain-link"><span class="icon-arrow-up"></span></a>
+		</div>
 
+		<div id="navigation">
 			<div id="toc-sections" class="toc-sections">
 				{{#each sections}}
 					<div class="section lvl1">
@@ -69,14 +69,16 @@
 
 			<h1 id="top" class="title">Weaver.js</h1>
 			<div class="subtitle">Concise and readable multitasking
-				(compatible with
-				<a target="_blank" href="http://wiki.commonjs.org/wiki/CommonJS">CommonJS</a>/<a target="_blank" href="http://nodejs.org/">Node.js</a>/<a target="_blank" href="http://iojs.org/">io.js</a>,
-				<a target="_blank" href="http://requirejs.org">AMD/Require.js</a>,
-				<a target="_blank" href="http://npmjs.org">npm</a>,
-				<a target="_blank" href="http://bower.io">Bower</a>,
-				<a target="_blank" href="http://spmjs.io">spm</a>,
-				<a target="_blank" href="https://meteor.com">Meteor/Atmosphere</a>,
-				and plain JavaScript)
+				<div class="footnote">
+					Compatible with
+					<a target="_blank" href="http://wiki.commonjs.org/wiki/CommonJS">CommonJS</a>/<a target="_blank" href="http://nodejs.org/">Node.js</a>,
+					<a target="_blank" href="http://requirejs.org">AMD/Require.js</a>,
+					<a target="_blank" href="http://npmjs.org">npm</a>,
+					<a target="_blank" href="http://bower.io">Bower</a>,
+					<a target="_blank" href="http://spmjs.io">spm</a>,
+					<a target="_blank" href="https://meteor.com">Meteor/Atmosphere</a>,
+					and plain JavaScript
+				</div>
 			</div>
 
 			<div class="buttons-subtitle">
@@ -86,18 +88,18 @@
 			</div>
 
 			<div class="links">
-				<a target="_blank" href="demo.html"><span class="icon-time"></span> Performance demo</a> |
-				<a target="_blank" href="https://twitter.com/maxkfranz"><span class="icon-twitter"></span> Twitter</a> |
-				<a target="_blank" href="https://github.com/maxkfranz/weaver/issues/new"><span class="icon-bug"></span> File an issue or request a feature</a> |
-				<a target="_blank" href="http://stackoverflow.com/questions/tagged/weaver.js"><span class="icon-question"></span> Previous questions</a> |
-				<a target="_blank" href="http://stackoverflow.com/questions/ask?tags=weaver.js"><span class="icon-comments"></span> Ask a code help question</a> |
-				<a target="_blank" href="https://github.com/maxkfranz/weaver/milestones"><span class="icon-calendar"></span> Version milestones/changelogs</a>
+				<a target="_blank" href="demo.html"><span class="icon-time"></span> Performance demo</a> &nbsp;
+				<a target="_blank" href="https://twitter.com/maxkfranz"><span class="icon-twitter"></span> Twitter</a> &nbsp;
+				<a target="_blank" href="https://github.com/maxkfranz/weaver/issues/new"><span class="icon-bug"></span> File an issue or request a feature</a> &nbsp;
+				<a target="_blank" href="http://stackoverflow.com/questions/tagged/weaver.js"><span class="icon-question"></span> Previous questions</a> &nbsp;
+				<a target="_blank" href="http://stackoverflow.com/questions/ask?tags=weaver.js"><span class="icon-comments"></span> Ask a question</a> &nbsp;
+				<a target="_blank" href="https://github.com/maxkfranz/weaver/milestones"><span class="icon-calendar"></span> Milestones</a>
 			</div>
 
 			<div class="links likes">
-				<span class="like-label">Like Weaver.js?</span> |
-				<a target="_blank" href="https://github.com/maxkfranz/weaver"><span class="icon-star"></span> Star it on GitHub</a> |
-				<a target="_blank" href="https://twitter.com/intent/tweet?status=Weaver.js,%20concise%20and%20readable%20multitasking%20weaver.js.org"><span class="icon-twitter"></span> Share it on Twitter</a> |
+				<span class="like-label">Like Weaver.js?</span> &nbsp;
+				<a target="_blank" href="https://github.com/maxkfranz/weaver"><span class="icon-star"></span> Star it on GitHub</a> &nbsp;
+				<a target="_blank" href="https://twitter.com/intent/tweet?status=Weaver.js,%20concise%20and%20readable%20multitasking%20weaver.js.org"><span class="icon-twitter"></span> Share it on Twitter</a> &nbsp;
 				<a target="_blank" href="https://plus.google.com/share?url=weaver.js.org"><span class="icon-google-plus"></span> Share it on Google+</a>
 			</div>
 
