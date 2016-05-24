@@ -2,7 +2,7 @@
   "name": "weaverjs",
   "version": "1.2.0",
   "license": "MIT",
-  "description": "Concise and readable multitasking",
+  "description": "Concise and readable concurrency",
   "homepage": "http://weaver.js.org",
   "repository": {
     "type": "git",
@@ -16,11 +16,11 @@
     }
   ],
   "keywords": [
-    "multitasking",
+    "concurrency",
+    "multithreading",
     "thread",
     "fabric",
-    "worker",
-    "task"
+    "worker"
   ],
   "main": "dist/weaver.js",
   "ignore": [

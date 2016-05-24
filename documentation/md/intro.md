@@ -21,16 +21,16 @@ Expensive calculations can make your app painfully slow for your users. You can 
  * Allows passing data to threads and fabrics
  * Allows requiring external functions
  * Uses promises to make managing your asynchronous workflows easier (and includes a small, internal polyfil for promiseless browsers)
- * Includes multitasking versions of popular array functions
+ * Includes concurrent versions of popular array functions
  * Chainable for convenience
- * Falls back on no-threads implementation for environments that do not support multitasking
+ * Falls back on no-threads implementation for environments that do not support concurrency
  * Well maintained, with only a sliver of active bug time (i.e. minimised time to bugfix)
 
 
 
 ## About
 
-Weaver.js is an open-source multitasking library written in JavaScript.  You can use Weaver.js for speeding up your code where parallelisation applies.
+Weaver.js is an open-source concurrency library written in JavaScript.  You can use Weaver.js for speeding up your code where parallelisation applies.
 
 Weaver.js is an open-source project, and anyone is free to contribute.  For more information, refer to the [GitHub README](https://github.com/maxkfranz/weaver).
 

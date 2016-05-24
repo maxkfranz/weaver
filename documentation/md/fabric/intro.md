@@ -1,4 +1,4 @@
-A fabric is a collection of threads that can be used together in a collaborative fashion for multitasking purposes, thereby increasing the overall speed of execution of parallel code.  A fabric may be created as follows:
+A fabric is a collection of threads that can be used together in a collaborative fashion for concurrency purposes, thereby increasing the overall speed of execution of parallel code.  A fabric may be created as follows:
 
 ```js
 var fabric = weaver.fabric();
