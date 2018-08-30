@@ -1,7 +1,7 @@
 # Weaver.js
 
 [![JS.ORG](http://img.shields.io/badge/js.org-weaver-ffb400.svg?style=flat-square)](http://js.org)
-[![Build Status](http://travis-ci.org/maxkfranz/weaver.svg?branch=master)](https://travis-ci.org/maxkfranz/weaver)
+[![Build Status](http://travis-ci.org/maxkfranz/weaver.svg?branch=master)](https://travis-ci.org/maxkfranz/weaver) [![Greenkeeper badge](https://badges.greenkeeper.io/maxkfranz/weaver.svg)](https://greenkeeper.io/)
 
 
 
